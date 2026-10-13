@@ -575,34 +575,46 @@ pres.addSection({ title: 'Lead Generation' });
 const s10 = pres.addSlide({ sectionTitle: 'Lead Generation' });
 addLabel(s10, 'LEAD GENERATION | PANORAMICA');
 
-s10.addText('Le lead totali da sito raddoppiano YoY, trainate dalle landing rivenditori e dalle nuove campagne', {
+s10.addText('La nuova landing rivenditori porta 215 preventivi, compensando il calo delle lead tradizionali (-24,5%)', {
   x: 0.5, y: 0.7, w: 12, h: 0.8,
   fontSize: 20, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0
 });
 
 const leadHeader = [
   [
-    { text: 'Tipologia form', options: { bold: true, color: WHITE, fontSize: 9, fontFace: FONT, fill: { color: DARK } } },
+    { text: 'Tipologia lead', options: { bold: true, color: WHITE, fontSize: 9, fontFace: FONT, fill: { color: DARK } } },
+    { text: 'Fonte', options: { bold: true, color: WHITE, fontSize: 9, fontFace: FONT, fill: { color: DARK } } },
     { text: 'Set 2026', options: { bold: true, color: WHITE, fontSize: 9, fontFace: FONT, align: 'right', fill: { color: DARK } } },
     { text: 'Set 2025', options: { bold: true, color: WHITE, fontSize: 9, fontFace: FONT, align: 'right', fill: { color: DARK } } },
     { text: 'Var. %', options: { bold: true, color: WHITE, fontSize: 9, fontFace: FONT, align: 'right', fill: { color: DARK } } }
   ]
 ];
 const leadData = [
-  ['Form contatto generico (generate_lead)', '231', '193', '+19,7%'],
-  ['Invii form landing rivenditori', '155', '-', 'nuovo'],
-  ['Richieste informazioni prodotto', '84', '-', 'nuovo'],
-  ['Download magazine FEEL', '35', '69', '-49,3%'],
-  ['Registrazione Area Pro', '33', '24', '+37,5%'],
-  ['Form contatto sito', '19', '22', '-13,6%'],
-  ['Clic iscrizione professionisti', '15', '14', '+7,1%']
+  ['Preventivo LP (landing rivenditori)', 'HubSpot', '215', '-', 'nuovo'],
+  ['Info prodotto (totale)', 'HubSpot + MyArea', '61', '100', '-39,0%'],
+  ['Registrazioni area', 'HubSpot', '56', '55', '+1,8%'],
+  ['FEEL5', 'HubSpot', '54', '99', '-45,5%'],
+  ['Form contatto (IT/EN/ES/FR)', 'HubSpot', '38', '36', '+5,6%'],
+  ['Contatta PV', 'MyArea', '25', '29', '-13,8%'],
+  ['FEEL4', 'HubSpot', '7', '2', '+250,0%'],
+  ['Newsletter', 'HubSpot', '3', '2', '+50,0%']
 ];
-const leadTotals = [
+const leadTotals1 = [
   [
-    { text: 'Totale eventi lead', options: { bold: true, fontSize: 10, fontFace: FONT, color: DARK } },
-    { text: '680', options: { bold: true, fontSize: 10, fontFace: FONT, color: DARK, align: 'right' } },
-    { text: '322', options: { bold: true, fontSize: 10, fontFace: FONT, color: DARK, align: 'right' } },
-    { text: '+111%', options: { bold: true, fontSize: 10, fontFace: FONT, color: GREEN, align: 'right' } }
+    { text: 'Totale (escl. Preventivo LP)', options: { bold: true, fontSize: 10, fontFace: FONT, color: DARK } },
+    { text: '', options: { fontSize: 10, fontFace: FONT } },
+    { text: '244', options: { bold: true, fontSize: 10, fontFace: FONT, color: DARK, align: 'right' } },
+    { text: '323', options: { bold: true, fontSize: 10, fontFace: FONT, color: DARK, align: 'right' } },
+    { text: '-24,5%', options: { bold: true, fontSize: 10, fontFace: FONT, color: RED, align: 'right' } }
+  ]
+];
+const leadTotals2 = [
+  [
+    { text: 'Totale (incl. Preventivo LP)', options: { bold: true, fontSize: 10, fontFace: FONT, color: DARK } },
+    { text: '', options: { fontSize: 10, fontFace: FONT } },
+    { text: '459', options: { bold: true, fontSize: 10, fontFace: FONT, color: DARK, align: 'right' } },
+    { text: '', options: { fontSize: 10, fontFace: FONT } },
+    { text: '', options: { fontSize: 10, fontFace: FONT } }
   ]
 ];
 
@@ -612,38 +624,41 @@ const leadRows = [
     text: cell,
     options: {
       fontSize: 10, fontFace: FONT,
-      color: j === 3 && cell.startsWith('+') ? GREEN : j === 3 && cell.startsWith('-') ? RED : DARK,
-      align: j > 0 ? 'right' : 'left',
+      color: j === 4 && cell.startsWith('+') ? GREEN : j === 4 && cell.startsWith('-') ? RED : DARK,
+      align: j > 1 ? 'right' : 'left',
       fill: { color: i % 2 === 0 ? WHITE : LGRAY }
     }
   }))),
-  ...leadTotals
+  ...leadTotals1,
+  ...leadTotals2
 ];
 
 s10.addTable(leadRows, {
   x: 0.5, y: 1.7, w: 12.3,
   border: { type: 'none' },
-  colW: [5.5, 2.0, 2.0, 2.0],
-  rowH: [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.45],
+  colW: [4.0, 2.0, 1.8, 1.8, 1.8],
+  rowH: [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.45, 0.45],
   autoPage: false
 });
 
-// KPI cards on the right side
+// KPI cards
 const leadKpis = [
-  { label: 'LEAD TOTALI', val: '680', delta: '+111%', sub: 'vs 322 set 2025', color: GREEN },
-  { label: 'REGISTRAZIONI PRO', val: '33', delta: '+37,5%', sub: 'vs 24 set 2025', color: GREEN }
+  { label: 'LEAD TOTALI (INCL. LP)', val: '459', delta: '', sub: 'set 2026', color: DARK },
+  { label: 'PREVENTIVI LP', val: '215', delta: 'nuovo', sub: 'landing rivenditori', color: RED },
+  { label: 'LEAD TRADIZIONALI', val: '244', delta: '-24,5%', sub: 'vs 323 set 2025', color: RED }
 ];
 leadKpis.forEach((kpi, i) => {
-  const y = 5.3 + i * 0;
-  const x = 0.5 + i * 6.3;
-  s10.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: x, y: 5.3, w: 5.8, h: 1.0, rectRadius: 0.08, fill: { color: LGRAY } });
-  s10.addText(kpi.label, { x: x + 0.2, y: 5.35, w: 2, h: 0.2, fontSize: 8, fontFace: FONT, bold: true, color: GRAY, isTextBox: true, margin: 0 });
-  s10.addText(kpi.val, { x: x + 0.2, y: 5.55, w: 1.5, h: 0.4, fontSize: 26, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
-  s10.addText(kpi.delta, { x: x + 1.8, y: 5.55, w: 1.2, h: 0.4, fontSize: 14, fontFace: FONT, bold: true, color: kpi.color, isTextBox: true, margin: 0 });
-  s10.addText(kpi.sub, { x: x + 3.2, y: 5.6, w: 2, h: 0.3, fontSize: 8, fontFace: FONT, color: 'AAAAAA', isTextBox: true, margin: 0 });
+  const x = 0.5 + i * 4.2;
+  s10.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: x, y: 5.9, w: 3.9, h: 1.0, rectRadius: 0.08, fill: { color: LGRAY } });
+  s10.addText(kpi.label, { x: x + 0.2, y: 5.95, w: 3.5, h: 0.2, fontSize: 8, fontFace: FONT, bold: true, color: GRAY, isTextBox: true, margin: 0 });
+  s10.addText(kpi.val, { x: x + 0.2, y: 6.15, w: 1.5, h: 0.4, fontSize: 26, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
+  if (kpi.delta) {
+    s10.addText(kpi.delta, { x: x + 1.8, y: 6.15, w: 1.2, h: 0.4, fontSize: 14, fontFace: FONT, bold: true, color: kpi.color, isTextBox: true, margin: 0 });
+  }
+  s10.addText(kpi.sub, { x: x + 0.2, y: 6.55, w: 3, h: 0.25, fontSize: 8, fontFace: FONT, color: 'AAAAAA', isTextBox: true, margin: 0 });
 });
 
-addFooter(s10, 'Fonte dati: GA4 | Periodo analizzato: set 2026 YoY');
+addFooter(s10, 'Fonte dati: HubSpot, MyArea | Periodo analizzato: set 2026 YoY');
 
 // =============================================
 // SLIDE 11 - LEAD GENERATION | FOCUS RIVENDITORI
@@ -651,51 +666,53 @@ addFooter(s10, 'Fonte dati: GA4 | Periodo analizzato: set 2026 YoY');
 const s11 = pres.addSlide({ sectionTitle: 'Lead Generation' });
 addLabel(s11, 'LEAD GENERATION | FOCUS RIVENDITORI');
 
-s11.addText('Le campagne Lead Gen rivenditori generano 155 invii form dalla landing, con Google e Meta come driver principali', {
+s11.addText('La landing rivenditori raccoglie 215 preventivi, con Google Ads e Meta Ads come driver principali del traffico', {
   x: 0.5, y: 0.7, w: 12, h: 0.8,
   fontSize: 20, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0
 });
 
+// Big KPI
+s11.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.5, y: 1.7, w: 12.3, h: 1.3, rectRadius: 0.1, fill: { color: LGRAY } });
+s11.addText('PREVENTIVI LANDING RIVENDITORI', { x: 0.8, y: 1.8, w: 5, h: 0.25, fontSize: 9, fontFace: FONT, bold: true, color: GRAY, isTextBox: true, margin: 0 });
+s11.addText('215', { x: 0.8, y: 2.1, w: 2, h: 0.6, fontSize: 42, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
+s11.addText('preventivi compilati (fonte: HubSpot)', { x: 3.0, y: 2.3, w: 5, h: 0.3, fontSize: 12, fontFace: FONT, color: GRAY, isTextBox: true, margin: 0 });
+s11.addText('nuovo canale', { x: 10.5, y: 2.1, w: 2, h: 0.6, fontSize: 18, fontFace: FONT, bold: true, color: RED, isTextBox: true, margin: 0 });
+
 // Google Results Card
-s11.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.5, y: 1.8, w: 5.9, h: 4.8, rectRadius: 0.1, fill: { color: LGRAY } });
-s11.addText('Risultati Google', { x: 0.8, y: 2.0, w: 4, h: 0.4, fontSize: 16, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
-s11.addText('Campagna DG Conversion Lead Gen', { x: 0.8, y: 2.4, w: 5, h: 0.3, fontSize: 10, fontFace: FONT, color: GRAY, isTextBox: true, margin: 0 });
+s11.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.5, y: 3.3, w: 5.9, h: 3.3, rectRadius: 0.1, fill: { color: LGRAY } });
+s11.addText('Campagna Google Ads', { x: 0.8, y: 3.5, w: 4, h: 0.4, fontSize: 16, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
+s11.addText('DG Conversion Lead Gen', { x: 0.8, y: 3.9, w: 5, h: 0.3, fontSize: 10, fontFace: FONT, color: GRAY, isTextBox: true, margin: 0 });
 
 const gLeadKpis = [
-  ['CONVERSIONI', '~21', ''],
-  ['CPL', '~30 €', ''],
-  ['IMPRESSION', '64.777', ''],
-  ['CLIC', '2.288', ''],
-  ['INVESTIMENTO', '636 €', '']
+  ['IMPRESSION', '64.777'],
+  ['CLIC', '2.288'],
+  ['INVESTIMENTO', '636 €'],
+  ['CPC', '0,28 €']
 ];
 gLeadKpis.forEach((kpi, i) => {
-  const y = 3.0 + i * 0.65;
+  const y = 4.5 + i * 0.5;
   s11.addText(kpi[0], { x: 0.8, y: y, w: 1.8, h: 0.2, fontSize: 8, fontFace: FONT, bold: true, color: GRAY, isTextBox: true, margin: 0 });
-  s11.addText(kpi[1], { x: 0.8, y: y + 0.2, w: 2.5, h: 0.3, fontSize: 16, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
+  s11.addText(kpi[1], { x: 2.8, y: y, w: 2.5, h: 0.25, fontSize: 14, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
 });
 
 // Meta Results Card
-s11.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 6.8, y: 1.8, w: 5.9, h: 4.8, rectRadius: 0.1, fill: { color: LGRAY } });
-s11.addText('Risultati Meta', { x: 7.1, y: 2.0, w: 4, h: 0.4, fontSize: 16, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
-s11.addText('Campagna Lead Gen Rivenditori DEF', { x: 7.1, y: 2.4, w: 5, h: 0.3, fontSize: 10, fontFace: FONT, color: GRAY, isTextBox: true, margin: 0 });
+s11.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 6.8, y: 3.3, w: 5.9, h: 3.3, rectRadius: 0.1, fill: { color: LGRAY } });
+s11.addText('Campagna Meta Ads', { x: 7.1, y: 3.5, w: 4, h: 0.4, fontSize: 16, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
+s11.addText('Lead Gen Rivenditori DEF', { x: 7.1, y: 3.9, w: 5, h: 0.3, fontSize: 10, fontFace: FONT, color: GRAY, isTextBox: true, margin: 0 });
 
 const mLeadKpis = [
-  ['INVII FORM LP', '155', '(da tutte le sorgenti)'],
-  ['REACH', '36.082', ''],
-  ['LINK CLIC', '2.308', ''],
-  ['CTR', '1,92%', ''],
-  ['INVESTIMENTO', '1.108 €', '']
+  ['REACH', '36.082'],
+  ['LINK CLIC', '2.308'],
+  ['INVESTIMENTO', '1.108 €'],
+  ['CTR', '1,92%']
 ];
 mLeadKpis.forEach((kpi, i) => {
-  const y = 3.0 + i * 0.65;
+  const y = 4.5 + i * 0.5;
   s11.addText(kpi[0], { x: 7.1, y: y, w: 1.8, h: 0.2, fontSize: 8, fontFace: FONT, bold: true, color: GRAY, isTextBox: true, margin: 0 });
-  s11.addText(kpi[1], { x: 7.1, y: y + 0.2, w: 2.5, h: 0.3, fontSize: 16, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
-  if (kpi[2]) {
-    s11.addText(kpi[2], { x: 9.5, y: y + 0.2, w: 2, h: 0.3, fontSize: 8, fontFace: FONT, color: 'AAAAAA', isTextBox: true, margin: 0 });
-  }
+  s11.addText(kpi[1], { x: 9.1, y: y, w: 2.5, h: 0.25, fontSize: 14, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
 });
 
-addFooter(s11, 'Fonte dati: Google Ads, Meta Ads, GA4 | Periodo analizzato: set 2026');
+addFooter(s11, 'Fonte dati: HubSpot, Google Ads, Meta Ads | Periodo analizzato: set 2026');
 
 // =============================================
 // SLIDE 12 - SECTION: FOCUS MAGAZINE
@@ -855,7 +872,7 @@ const points = [
   },
   {
     title: 'LEAD GENERATION',
-    text: 'Le lead totali raddoppiano: 680 eventi lead vs 322 del 2025 (+111%). La campagna Lead Gen Rivenditori genera 155 invii form, con Google e Meta come driver principali. Le registrazioni Area Pro crescono del 37,5% (33 vs 24).'
+    text: 'La nuova landing rivenditori porta 215 preventivi (nuovo canale). Le lead tradizionali calano del 24,5% (244 vs 323), in particolare FEEL5 (-45,5%) e info prodotto (-39%). Registrazioni area stabili (+1,8%). Totale lead incl. LP: 459.'
   },
   {
     title: 'CALO ORGANICO E MAGAZINE',
