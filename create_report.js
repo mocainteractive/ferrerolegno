@@ -569,23 +569,281 @@ s9.addText('L\'Italia pesa per l\'80% dei clic organici. Nonostante il miglioram
 addFooter(s9, 'Fonte dati: GSC | Periodo analizzato: set 2026 YoY');
 
 // =============================================
-// SLIDE 10 - SECTION: IN CHIUSURA
+// SLIDE 10 - LEAD GENERATION | PANORAMICA
+// =============================================
+pres.addSection({ title: 'Lead Generation' });
+const s10 = pres.addSlide({ sectionTitle: 'Lead Generation' });
+addLabel(s10, 'LEAD GENERATION | PANORAMICA');
+
+s10.addText('Le lead totali da sito raddoppiano YoY, trainate dalle landing rivenditori e dalle nuove campagne', {
+  x: 0.5, y: 0.7, w: 12, h: 0.8,
+  fontSize: 20, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0
+});
+
+const leadHeader = [
+  [
+    { text: 'Tipologia form', options: { bold: true, color: WHITE, fontSize: 9, fontFace: FONT, fill: { color: DARK } } },
+    { text: 'Set 2026', options: { bold: true, color: WHITE, fontSize: 9, fontFace: FONT, align: 'right', fill: { color: DARK } } },
+    { text: 'Set 2025', options: { bold: true, color: WHITE, fontSize: 9, fontFace: FONT, align: 'right', fill: { color: DARK } } },
+    { text: 'Var. %', options: { bold: true, color: WHITE, fontSize: 9, fontFace: FONT, align: 'right', fill: { color: DARK } } }
+  ]
+];
+const leadData = [
+  ['Form contatto generico (generate_lead)', '231', '193', '+19,7%'],
+  ['Invii form landing rivenditori', '155', '-', 'nuovo'],
+  ['Richieste informazioni prodotto', '84', '-', 'nuovo'],
+  ['Download magazine FEEL', '35', '69', '-49,3%'],
+  ['Registrazione Area Pro', '33', '24', '+37,5%'],
+  ['Form contatto sito', '19', '22', '-13,6%'],
+  ['Clic iscrizione professionisti', '15', '14', '+7,1%']
+];
+const leadTotals = [
+  [
+    { text: 'Totale eventi lead', options: { bold: true, fontSize: 10, fontFace: FONT, color: DARK } },
+    { text: '680', options: { bold: true, fontSize: 10, fontFace: FONT, color: DARK, align: 'right' } },
+    { text: '322', options: { bold: true, fontSize: 10, fontFace: FONT, color: DARK, align: 'right' } },
+    { text: '+111%', options: { bold: true, fontSize: 10, fontFace: FONT, color: GREEN, align: 'right' } }
+  ]
+];
+
+const leadRows = [
+  ...leadHeader,
+  ...leadData.map((row, i) => row.map((cell, j) => ({
+    text: cell,
+    options: {
+      fontSize: 10, fontFace: FONT,
+      color: j === 3 && cell.startsWith('+') ? GREEN : j === 3 && cell.startsWith('-') ? RED : DARK,
+      align: j > 0 ? 'right' : 'left',
+      fill: { color: i % 2 === 0 ? WHITE : LGRAY }
+    }
+  }))),
+  ...leadTotals
+];
+
+s10.addTable(leadRows, {
+  x: 0.5, y: 1.7, w: 12.3,
+  border: { type: 'none' },
+  colW: [5.5, 2.0, 2.0, 2.0],
+  rowH: [0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.4, 0.45],
+  autoPage: false
+});
+
+// KPI cards on the right side
+const leadKpis = [
+  { label: 'LEAD TOTALI', val: '680', delta: '+111%', sub: 'vs 322 set 2025', color: GREEN },
+  { label: 'REGISTRAZIONI PRO', val: '33', delta: '+37,5%', sub: 'vs 24 set 2025', color: GREEN }
+];
+leadKpis.forEach((kpi, i) => {
+  const y = 5.3 + i * 0;
+  const x = 0.5 + i * 6.3;
+  s10.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: x, y: 5.3, w: 5.8, h: 1.0, rectRadius: 0.08, fill: { color: LGRAY } });
+  s10.addText(kpi.label, { x: x + 0.2, y: 5.35, w: 2, h: 0.2, fontSize: 8, fontFace: FONT, bold: true, color: GRAY, isTextBox: true, margin: 0 });
+  s10.addText(kpi.val, { x: x + 0.2, y: 5.55, w: 1.5, h: 0.4, fontSize: 26, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
+  s10.addText(kpi.delta, { x: x + 1.8, y: 5.55, w: 1.2, h: 0.4, fontSize: 14, fontFace: FONT, bold: true, color: kpi.color, isTextBox: true, margin: 0 });
+  s10.addText(kpi.sub, { x: x + 3.2, y: 5.6, w: 2, h: 0.3, fontSize: 8, fontFace: FONT, color: 'AAAAAA', isTextBox: true, margin: 0 });
+});
+
+addFooter(s10, 'Fonte dati: GA4 | Periodo analizzato: set 2026 YoY');
+
+// =============================================
+// SLIDE 11 - LEAD GENERATION | FOCUS RIVENDITORI
+// =============================================
+const s11 = pres.addSlide({ sectionTitle: 'Lead Generation' });
+addLabel(s11, 'LEAD GENERATION | FOCUS RIVENDITORI');
+
+s11.addText('Le campagne Lead Gen rivenditori generano 155 invii form dalla landing, con Google e Meta come driver principali', {
+  x: 0.5, y: 0.7, w: 12, h: 0.8,
+  fontSize: 20, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0
+});
+
+// Google Results Card
+s11.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.5, y: 1.8, w: 5.9, h: 4.8, rectRadius: 0.1, fill: { color: LGRAY } });
+s11.addText('Risultati Google', { x: 0.8, y: 2.0, w: 4, h: 0.4, fontSize: 16, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
+s11.addText('Campagna DG Conversion Lead Gen', { x: 0.8, y: 2.4, w: 5, h: 0.3, fontSize: 10, fontFace: FONT, color: GRAY, isTextBox: true, margin: 0 });
+
+const gLeadKpis = [
+  ['CONVERSIONI', '~21', ''],
+  ['CPL', '~30 €', ''],
+  ['IMPRESSION', '64.777', ''],
+  ['CLIC', '2.288', ''],
+  ['INVESTIMENTO', '636 €', '']
+];
+gLeadKpis.forEach((kpi, i) => {
+  const y = 3.0 + i * 0.65;
+  s11.addText(kpi[0], { x: 0.8, y: y, w: 1.8, h: 0.2, fontSize: 8, fontFace: FONT, bold: true, color: GRAY, isTextBox: true, margin: 0 });
+  s11.addText(kpi[1], { x: 0.8, y: y + 0.2, w: 2.5, h: 0.3, fontSize: 16, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
+});
+
+// Meta Results Card
+s11.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 6.8, y: 1.8, w: 5.9, h: 4.8, rectRadius: 0.1, fill: { color: LGRAY } });
+s11.addText('Risultati Meta', { x: 7.1, y: 2.0, w: 4, h: 0.4, fontSize: 16, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
+s11.addText('Campagna Lead Gen Rivenditori DEF', { x: 7.1, y: 2.4, w: 5, h: 0.3, fontSize: 10, fontFace: FONT, color: GRAY, isTextBox: true, margin: 0 });
+
+const mLeadKpis = [
+  ['INVII FORM LP', '155', '(da tutte le sorgenti)'],
+  ['REACH', '36.082', ''],
+  ['LINK CLIC', '2.308', ''],
+  ['CTR', '1,92%', ''],
+  ['INVESTIMENTO', '1.108 €', '']
+];
+mLeadKpis.forEach((kpi, i) => {
+  const y = 3.0 + i * 0.65;
+  s11.addText(kpi[0], { x: 7.1, y: y, w: 1.8, h: 0.2, fontSize: 8, fontFace: FONT, bold: true, color: GRAY, isTextBox: true, margin: 0 });
+  s11.addText(kpi[1], { x: 7.1, y: y + 0.2, w: 2.5, h: 0.3, fontSize: 16, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
+  if (kpi[2]) {
+    s11.addText(kpi[2], { x: 9.5, y: y + 0.2, w: 2, h: 0.3, fontSize: 8, fontFace: FONT, color: 'AAAAAA', isTextBox: true, margin: 0 });
+  }
+});
+
+addFooter(s11, 'Fonte dati: Google Ads, Meta Ads, GA4 | Periodo analizzato: set 2026');
+
+// =============================================
+// SLIDE 12 - SECTION: FOCUS MAGAZINE
+// =============================================
+pres.addSection({ title: 'Focus Magazine' });
+const s12 = pres.addSlide({ sectionTitle: 'Focus Magazine' });
+s12.addShape(pres.shapes.RECTANGLE, { x: 0, y: 0, w: 13.3, h: 7.5, fill: { color: DARK } });
+s12.addText([
+  { text: 'Focus Magazine.', options: { fontSize: 38, fontFace: FONT, color: WHITE, italic: true } }
+], { x: 1.0, y: 2.8, w: 11, h: 2, isTextBox: true, margin: 0 });
+
+// =============================================
+// SLIDE 13 - TRAFFICO ORGANICO | MAGAZINE
+// =============================================
+const s13 = pres.addSlide({ sectionTitle: 'Focus Magazine' });
+addLabel(s13, 'TRAFFICO ORGANICO | MAGAZINE');
+
+s13.addText('Il magazine registra un calo dei clic organici, ma la posizione media migliora notevolmente', {
+  x: 0.5, y: 0.7, w: 12, h: 0.8,
+  fontSize: 20, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0
+});
+
+const magMetrics = [
+  { label: 'CLIC', val: '92', delta: '-21,4%', deltaColor: RED, sub: 'vs 117 set 2025' },
+  { label: 'IMPRESSION', val: '8.267', delta: '-17,1%', deltaColor: RED, sub: 'vs 9.969 set 2025' },
+  { label: 'CTR MEDIO', val: '1,11%', delta: '-0,06pp', deltaColor: RED, sub: 'vs 1,17% set 2025' },
+  { label: 'POSIZIONE MEDIA', val: '8,7', delta: '+10,7 pos.', deltaColor: GREEN, sub: 'vs 19,4 set 2025' }
+];
+
+magMetrics.forEach((m, i) => {
+  const xBase = 0.5 + i * 3.1;
+  s13.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: xBase, y: 1.8, w: 2.8, h: 2.5, rectRadius: 0.1, fill: { color: LGRAY } });
+  s13.addText(m.label, { x: xBase + 0.2, y: 1.95, w: 2.4, h: 0.3, fontSize: 9, fontFace: FONT, bold: true, color: GRAY, isTextBox: true, margin: 0 });
+  s13.addText(m.val, { x: xBase + 0.2, y: 2.35, w: 2.4, h: 0.7, fontSize: 36, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
+  s13.addText(m.delta, { x: xBase + 0.2, y: 3.1, w: 2.4, h: 0.35, fontSize: 16, fontFace: FONT, bold: true, color: m.deltaColor, isTextBox: true, margin: 0 });
+  s13.addText(m.sub, { x: xBase + 0.2, y: 3.55, w: 2.4, h: 0.3, fontSize: 8, fontFace: FONT, color: 'AAAAAA', isTextBox: true, margin: 0 });
+});
+
+s13.addText([
+  { text: 'Il magazine registra un miglioramento della posizione media molto significativo (da 19,4 a 8,7, +10,7 posizioni). ', options: { bold: true } },
+  { text: 'Tuttavia, i clic diminuiscono del 21% per effetto della contrazione delle impression (-17%). L\'erosione del CTR da AI Overview continua a incidere particolarmente sui contenuti informativi del magazine. I download del magazine FEEL calano del 49% rispetto a settembre 2025 (35 vs 69).' }
+], {
+  x: 0.5, y: 4.6, w: 12, h: 1.2,
+  fontSize: 11, fontFace: FONT, color: GRAY, isTextBox: true, margin: 0
+});
+
+addFooter(s13, 'Fonte dati: GSC | Periodo analizzato: set 2026 YoY');
+
+// =============================================
+// SLIDE 14 - TRAFFICO PAID | MAGAZINE
+// =============================================
+const s14 = pres.addSlide({ sectionTitle: 'Focus Magazine' });
+addLabel(s14, 'TRAFFICO PAID | MAGAZINE');
+
+s14.addText('La campagna Blog Consideration porta 7.059 clic al magazine con un CPC molto efficiente', {
+  x: 0.5, y: 0.7, w: 12, h: 0.8,
+  fontSize: 20, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0
+});
+
+s14.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.5, y: 1.8, w: 12.3, h: 4.0, rectRadius: 0.1, fill: { color: LGRAY } });
+s14.addText('Campagna Blog Consideration (Meta Ads)', { x: 0.8, y: 2.0, w: 8, h: 0.4, fontSize: 14, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
+s14.addText('Obiettivo: traffico qualificato verso gli articoli del magazine', { x: 0.8, y: 2.4, w: 8, h: 0.3, fontSize: 10, fontFace: FONT, color: GRAY, isTextBox: true, margin: 0 });
+
+const blogKpis = [
+  { label: 'LINK CLIC', val: '7.059', x: 0.8 },
+  { label: 'PERSONE RAGGIUNTE', val: '136.533', x: 3.5 },
+  { label: 'CTR', val: '2,26%', x: 6.2 },
+  { label: 'CPC MEDIO', val: '0,15 €', x: 8.9 },
+  { label: 'INVESTIMENTO', val: '1.061 €', x: 11.0 }
+];
+blogKpis.forEach(kpi => {
+  s14.addText(kpi.label, { x: kpi.x, y: 3.1, w: 2.5, h: 0.2, fontSize: 8, fontFace: FONT, bold: true, color: GRAY, isTextBox: true, margin: 0 });
+  s14.addText(kpi.val, { x: kpi.x, y: 3.35, w: 2.5, h: 0.5, fontSize: 22, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
+});
+
+s14.addText('Sessioni al magazine da GA4', { x: 0.8, y: 4.2, w: 5, h: 0.3, fontSize: 10, fontFace: FONT, bold: true, color: GRAY, isTextBox: true, margin: 0 });
+
+const magPages = [
+  ['Nuovo magazine FEEL5 (landing)', '445 sessioni'],
+  ['Magazine FEEL (indice)', '117 sessioni'],
+  ['Download magazine FEEL5', '37 sessioni'],
+  ['Magazine FEEL4 (landing)', '26 sessioni']
+];
+magPages.forEach((p, i) => {
+  const y = 4.6 + i * 0.3;
+  s14.addText(p[0], { x: 0.8, y: y, w: 5, h: 0.25, fontSize: 10, fontFace: FONT, color: DARK, isTextBox: true, margin: 0 });
+  s14.addText(p[1], { x: 6.0, y: y, w: 2, h: 0.25, fontSize: 10, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
+});
+
+addFooter(s14, 'Fonte dati: Meta Ads, GA4 | Periodo analizzato: set 2026');
+
+// =============================================
+// SLIDE 15 - PINTEREST
+// =============================================
+pres.addSection({ title: 'Pinterest' });
+const s15 = pres.addSlide({ sectionTitle: 'Pinterest' });
+addLabel(s15, 'PINTEREST');
+
+s15.addText('Pinterest si conferma un canale che porta traffico qualificato al sito, con sessioni in crescita del 22%', {
+  x: 0.5, y: 0.7, w: 12, h: 0.8,
+  fontSize: 20, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0
+});
+
+const pinMetrics = [
+  { label: 'SESSIONI SET 2026', val: '1.653', x: 0.5, w: 3.8 },
+  { label: 'SESSIONI SET 2025', val: '1.354', x: 4.8, w: 3.8 },
+  { label: 'VARIAZIONE YOY', val: '+22,1%', x: 9.1, w: 3.5 }
+];
+pinMetrics.forEach(m => {
+  s15.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: m.x, y: 1.8, w: m.w, h: 2.0, rectRadius: 0.1, fill: { color: LGRAY } });
+  s15.addText(m.label, { x: m.x + 0.2, y: 1.95, w: m.w - 0.4, h: 0.3, fontSize: 9, fontFace: FONT, bold: true, color: GRAY, isTextBox: true, margin: 0 });
+  s15.addText(m.val, { x: m.x + 0.2, y: 2.4, w: m.w - 0.4, h: 0.8, fontSize: 40, fontFace: FONT, bold: true, color: m.val.startsWith('+') ? GREEN : DARK, isTextBox: true, margin: 0 });
+});
+
+s15.addChart(pres.charts.BAR, [
+  { name: '', labels: ['Set 2026', 'Set 2025'], values: [1653, 1354] }
+], {
+  x: 0.5, y: 4.2, w: 12.3, h: 2.0,
+  showTitle: false,
+  barDir: 'bar', barGrouping: 'clustered',
+  chartColors: [RED],
+  showValue: true, dataLabelPosition: 'outEnd', dataLabelColor: DARK, dataLabelFontSize: 11, dataLabelFontFace: FONT,
+  showLegend: false,
+  catAxisLabelColor: GRAY, catAxisLabelFontSize: 10, catAxisLabelFontFace: FONT,
+  valAxisHidden: true,
+  valGridLine: { style: 'none' }, catGridLine: { style: 'none' }
+});
+
+addFooter(s15, 'Fonte dati: GA4 | Periodo analizzato: set 2026 YoY');
+
+// =============================================
+// SLIDE 16 - SECTION DIVIDER: IN CHIUSURA
 // =============================================
 pres.addSection({ title: 'In chiusura' });
-const s10 = pres.addSlide({ sectionTitle: 'In chiusura' });
-s10.addShape(pres.shapes.RECTANGLE, { x: 0, y: 0, w: 13.3, h: 7.5, fill: { color: DARK } });
-s10.addText('In chiusura.', {
+const s16 = pres.addSlide({ sectionTitle: 'In chiusura' });
+s16.addShape(pres.shapes.RECTANGLE, { x: 0, y: 0, w: 13.3, h: 7.5, fill: { color: DARK } });
+s16.addText('In chiusura.', {
   x: 1.0, y: 2.8, w: 11.3, h: 2,
   fontSize: 38, fontFace: FONT, color: WHITE, italic: true, isTextBox: true, margin: 0
 });
 
 // =============================================
-// SLIDE 11 - RIEPILOGO E PROSSIMI PASSI
+// SLIDE 17 - RIEPILOGO E PROSSIMI PASSI
 // =============================================
-const s11 = pres.addSlide({ sectionTitle: 'In chiusura' });
-addLabel(s11, 'RIEPILOGO | SETTEMBRE 2026');
+const s17 = pres.addSlide({ sectionTitle: 'In chiusura' });
+addLabel(s17, 'RIEPILOGO | SETTEMBRE 2026');
 
-s11.addText('Punti chiave e considerazioni', {
+s17.addText('Punti chiave e considerazioni', {
   x: 0.5, y: 0.7, w: 12, h: 0.7,
   fontSize: 22, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0
 });
@@ -593,15 +851,19 @@ s11.addText('Punti chiave e considerazioni', {
 const points = [
   {
     title: 'CRESCITA TRAFFICO PAID',
-    text: 'Le sessioni totali crescono del 59% YoY, trainate dall\'investimento paid. I canali a pagamento portano il 70% del traffico complessivo. In particolare, Search Generic (+353%) e le nuove campagne Demand Gen guidano la crescita con CPC molto efficiente (0,06-0,16 €).'
+    text: 'Le sessioni totali crescono del 59% YoY, trainate dall\'investimento paid. I canali a pagamento portano il 70% del traffico complessivo. Search Generic (+353%) e le nuove campagne Demand Gen guidano la crescita con CPC molto efficiente (0,06-0,16 €).'
   },
   {
-    title: 'CALO ORGANICO',
-    text: 'Il traffico organico continua il trend di calo (-18% clic in Italia). Le cause principali restano la contrazione della domanda di settore, l\'erosione del CTR da AI Overview e il calo delle ricerche di brand. La posizione media migliora (da 15,9 a 11,9), segno che non si tratta di un problema di posizionamento.'
+    title: 'LEAD GENERATION',
+    text: 'Le lead totali raddoppiano: 680 eventi lead vs 322 del 2025 (+111%). La campagna Lead Gen Rivenditori genera 155 invii form, con Google e Meta come driver principali. Le registrazioni Area Pro crescono del 37,5% (33 vs 24).'
   },
   {
-    title: 'META ADS',
-    text: 'La campagna Blog si conferma il miglior canale per traffico qualificato a basso costo (CPC 0,15 €). La Lead Gen Rivenditori porta conversioni con un CTR del 1,92%. L\'investimento totale su Meta cresce del 10,6% a 3.826 €.'
+    title: 'CALO ORGANICO E MAGAZINE',
+    text: 'Il traffico organico cala (-18% clic IT), per contrazione della domanda, AI Overview e calo ricerche brand. La posizione media migliora (da 15,9 a 11,9). Il magazine guadagna 10,7 posizioni (da 19,4 a 8,7) ma perde clic (-21%). Pinterest cresce del 22% (1.653 sessioni).'
+  },
+  {
+    title: 'META ADS E ADVERTISING',
+    text: 'Blog Consideration porta 7.059 clic a CPC 0,15 €. Google Ads quadruplica i clic (+465%) con CPC in calo del 64%. Investimento complessivo: 5.193 € Google + 3.826 € Meta = 9.019 € totali.'
   },
   {
     title: 'PROSSIMI PASSI',
@@ -610,33 +872,33 @@ const points = [
 ];
 
 points.forEach((p, i) => {
-  const y = 1.6 + i * 1.3;
-  s11.addShape(pres.shapes.ROUNDED_RECTANGLE, {
-    x: 0.5, y: y, w: 12.3, h: 1.15, rectRadius: 0.08, fill: { color: i === points.length - 1 ? 'FFF0EF' : LGRAY }
+  const y = 1.5 + i * 1.1;
+  s17.addShape(pres.shapes.ROUNDED_RECTANGLE, {
+    x: 0.5, y: y, w: 12.3, h: 0.95, rectRadius: 0.08, fill: { color: i === points.length - 1 ? 'FFF0EF' : LGRAY }
   });
 
-  s11.addText(p.title, {
-    x: 0.8, y: y + 0.1, w: 3, h: 0.25,
-    fontSize: 9, fontFace: FONT, bold: true, color: RED, isTextBox: true, margin: 0
+  s17.addText(p.title, {
+    x: 0.8, y: y + 0.08, w: 3, h: 0.22,
+    fontSize: 8, fontFace: FONT, bold: true, color: RED, isTextBox: true, margin: 0
   });
-  s11.addText(p.text, {
-    x: 0.8, y: y + 0.35, w: 11.7, h: 0.7,
-    fontSize: 10, fontFace: FONT, color: GRAY, isTextBox: true, margin: 0
+  s17.addText(p.text, {
+    x: 0.8, y: y + 0.3, w: 11.7, h: 0.6,
+    fontSize: 9, fontFace: FONT, color: GRAY, isTextBox: true, margin: 0
   });
 });
 
-addFooter(s11, '');
+addFooter(s17, '');
 
 // =============================================
-// SLIDE 12 - CONTATTI
+// SLIDE 18 - CONTATTI
 // =============================================
 pres.addSection({ title: 'Contatti' });
-const s12 = pres.addSlide({ sectionTitle: 'Contatti' });
+const s18 = pres.addSlide({ sectionTitle: 'Contatti' });
 
-s12.addShape(pres.shapes.OVAL, {
+s18.addShape(pres.shapes.OVAL, {
   x: 4.5, y: 0.8, w: 0.6, h: 0.6, fill: { color: RED }
 });
-s12.addText('moca', {
+s18.addText('moca', {
   x: 5.2, y: 0.8, w: 3, h: 0.6,
   fontSize: 36, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0
 });
@@ -655,26 +917,26 @@ team.forEach((t, i) => {
   const x = 0.8 + col * 4.5;
   const y = 2.2 + row * 1.4;
 
-  s12.addText(t.name, {
+  s18.addText(t.name, {
     x: x, y: y, w: 4, h: 0.3,
     fontSize: 14, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0
   });
-  s12.addText(t.role, {
+  s18.addText(t.role, {
     x: x, y: y + 0.3, w: 4, h: 0.25,
     fontSize: 10, fontFace: FONT, color: GRAY, isTextBox: true, margin: 0
   });
-  s12.addText(t.email, {
+  s18.addText(t.email, {
     x: x, y: y + 0.55, w: 4, h: 0.25,
     fontSize: 10, fontFace: FONT, color: RED, isTextBox: true, margin: 0
   });
 });
 
-s12.addText('MOCA Interactive S.r.l. Societa Benefit | Via Cernaia, 2 - 35141 Padova | P.IVA 04230520287', {
+s18.addText('MOCA Interactive S.r.l. Societa Benefit | Via Cernaia, 2 - 35141 Padova | P.IVA 04230520287', {
   x: 0.5, y: 6.8, w: 12, h: 0.3,
   fontSize: 7, fontFace: FONT, color: 'AAAAAA', align: 'center', isTextBox: true, margin: 0
 });
 
-addMocaLogo(s12);
+addMocaLogo(s18);
 
 // =============================================
 // WRITE FILE
