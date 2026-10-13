@@ -314,6 +314,92 @@ reasons.forEach((r, i) => {
 addFooter(s6, 'Fonte dati: GSC, Google Trends | Periodo: set 2026 vs set 2025');
 
 // =============================================
+// SLIDE 6B - ORGANICO | RICERCHE BRAND E TOP PAGES
+// =============================================
+const s6b = pres.addSlide({ sectionTitle: 'Andamento e risultati' });
+addSlideBase(s6b, 'TRAFFICO ORGANICO | APPROFONDIMENTO GSC');
+addTitle(s6b, 'Le ricerche brand calano fino al -53%, ma il catalogo prodotti cresce del 32%');
+
+s6b.addText('QUERY BRAND: CONFRONTO YOY', {
+  x: 0.5, y: 1.7, w: 6, h: 0.3,
+  fontSize: 10, fontFace: FONT, bold: true, color: RED, isTextBox: true, margin: 0
+});
+
+const brandQHeader = [[
+  { text: 'Query', options: { bold: true, color: WHITE, fontSize: 8, fontFace: FONT, fill: { color: DARK } } },
+  { text: 'Clic 2026', options: { bold: true, color: WHITE, fontSize: 8, fontFace: FONT, align: 'right', fill: { color: DARK } } },
+  { text: 'Clic 2025', options: { bold: true, color: WHITE, fontSize: 8, fontFace: FONT, align: 'right', fill: { color: DARK } } },
+  { text: 'Var. %', options: { bold: true, color: WHITE, fontSize: 8, fontFace: FONT, align: 'right', fill: { color: DARK } } }
+]];
+const brandQData = [
+  ['ferrero legno', '254', '537', '-52,7%'],
+  ['ferrero porte', '241', '367', '-34,3%'],
+  ['ferrerolegno', '97', '167', '-41,9%'],
+  ['ferrero porte interne', '89', '61', '+45,9%'],
+  ['ferrero legno porte', '103', '26', '+296,2%'],
+  ['ferrero legno listino prezzi', '39', '63', '-38,1%'],
+  ['ferrero legno maniglie', '27', '31', '-12,9%']
+];
+const brandQRows = [
+  ...brandQHeader,
+  ...brandQData.map((row, i) => row.map((cell, j) => ({
+    text: cell,
+    options: {
+      fontSize: 9, fontFace: FONT,
+      color: j === 3 && cell.startsWith('+') ? GREEN : j === 3 && cell.startsWith('-') ? RED : DARK,
+      align: j > 0 ? 'right' : 'left',
+      fill: { color: i % 2 === 0 ? WHITE : LGRAY }
+    }
+  })))
+];
+
+s6b.addTable(brandQRows, {
+  x: 0.5, y: 2.05, w: 6.0,
+  border: { type: 'none' },
+  colW: [2.4, 0.9, 0.9, 0.9],
+  rowH: [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+  autoPage: false
+});
+
+s6b.addText('TOP PAGINE: VARIAZIONE CLIC', {
+  x: 6.9, y: 1.7, w: 6, h: 0.3,
+  fontSize: 10, fontFace: FONT, bold: true, color: BLUE, isTextBox: true, margin: 0
+});
+
+s6b.addChart(pres.charts.BAR, [
+  { name: 'Set 2026', labels: ['Homepage', 'Tutte le porte', 'Soluzioni speciali', 'Punti vendita', 'Porte filo muro', 'Maniglie'], values: [631, 556, 260, 230, 183, 150] },
+  { name: 'Set 2025', labels: ['Homepage', 'Tutte le porte', 'Soluzioni speciali', 'Punti vendita', 'Porte filo muro', 'Maniglie'], values: [1237, 422, 397, 170, 214, 180] }
+], {
+  x: 6.9, y: 2.05, w: 5.9, h: 3.0,
+  showTitle: false,
+  barDir: 'bar', barGrouping: 'clustered',
+  chartColors: [BLUE, 'CCCCCC'],
+  showValue: true, dataLabelPosition: 'outEnd', dataLabelColor: DARK, dataLabelFontSize: 7, dataLabelFontFace: '+mn-lt',
+  showLegend: true, legendPos: 't', legendFontSize: 8, legendFontFace: '+mn-lt', legendColor: GRAY,
+  catAxisLabelColor: GRAY, catAxisLabelFontSize: 8, catAxisLabelFontFace: '+mn-lt',
+  valAxisHidden: true,
+  valGridLine: { style: 'none' }, catGridLine: { style: 'none' },
+  catAxisOrientation: 'maxMin'
+});
+
+s6b.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.5, y: 5.2, w: 12.3, h: 1.4, rectRadius: 0.08, fill: { color: LGRAY } });
+s6b.addText([
+  { text: 'GSC aggregato: ', options: { bold: true, color: DARK } },
+  { text: '6.738 clic (-13,3%) | 220.993 impression (+12,1%) | CTR 3,05% (-0,89pp) | Pos. media 10,3 (vs 14,3: +4 posizioni)', options: { color: GRAY } }
+], {
+  x: 0.7, y: 5.3, w: 11.8, h: 0.35,
+  fontSize: 10, fontFace: FONT, isTextBox: true, margin: 0
+});
+s6b.addText([
+  { text: 'Il calo delle ricerche brand (-53% su "ferrero legno") ', options: { bold: true } },
+  { text: 'e compensato dalla crescita del catalogo: "tutte le porte" segna +32%, trainata dal paid. "Ferrero legno porte" e "ferrero porte interne" crescono grazie al posizionamento organico migliorato. Le impression globali crescono (+12%) nonostante il calo dei clic: il sito e piu visibile, ma l\'AI Overview erode i clic.', options: {} }
+], {
+  x: 0.7, y: 5.7, w: 11.8, h: 0.8,
+  fontSize: 10, fontFace: FONT, color: GRAY, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3
+});
+addFooter(s6b, 'Fonte dati: Google Search Console | Periodo: set 2026 vs set 2025');
+
+// =============================================
 // SLIDE 7 - FOCUS ADVERTISING | PANORAMICA (3-column)
 // =============================================
 const s7 = pres.addSlide({ sectionTitle: 'Andamento e risultati' });
@@ -655,6 +741,86 @@ s12.addChart(pres.charts.BAR, [
 addFooter(s12, 'Fonte dati: HubSpot, MyArea | Periodo: set 2026 vs set 2025');
 
 // =============================================
+// SLIDE 12B - LEAD PER CANALE PAID
+// =============================================
+const s12b = pres.addSlide({ sectionTitle: 'Lead Generation' });
+addSlideBase(s12b, 'LEAD GENERATION | ATTRIBUZIONE PER CANALE');
+addTitle(s12b, 'Meta genera il 55% delle lead tracciate con un costo per lead inferiore del 60% rispetto a Google');
+
+s12b.addChart(pres.charts.DOUGHNUT, [
+  { name: 'Lead per canale', labels: ['Meta Ads', 'Google Ads', 'Organico', 'Diretto e altro'], values: [161, 63, 34, 33] }
+], {
+  x: 0.0, y: 1.7, w: 5.5, h: 4.0,
+  showTitle: false,
+  chartColors: [BLUE, RED, GREEN, DGRAY],
+  showLegend: true, legendPos: 'b', legendFontSize: 9, legendFontFace: '+mn-lt', legendColor: DARK,
+  showPercent: true,
+  dataLabelPosition: 'ctr',
+  dataLabelFontSize: 13,
+  dataLabelFontFace: '+mn-lt',
+  dataLabelColor: WHITE
+});
+
+const leadChHeader = [[
+  { text: 'Canale', options: { bold: true, color: WHITE, fontSize: 9, fontFace: FONT, fill: { color: DARK } } },
+  { text: 'Lead 2026', options: { bold: true, color: WHITE, fontSize: 9, fontFace: FONT, align: 'right', fill: { color: DARK } } },
+  { text: '% totale', options: { bold: true, color: WHITE, fontSize: 9, fontFace: FONT, align: 'right', fill: { color: DARK } } },
+  { text: 'Lead 2025', options: { bold: true, color: WHITE, fontSize: 9, fontFace: FONT, align: 'right', fill: { color: DARK } } },
+  { text: 'Var. lead', options: { bold: true, color: WHITE, fontSize: 9, fontFace: FONT, align: 'right', fill: { color: DARK } } },
+  { text: 'Costo 2026', options: { bold: true, color: WHITE, fontSize: 9, fontFace: FONT, align: 'right', fill: { color: DARK } } },
+  { text: 'Var. costo', options: { bold: true, color: WHITE, fontSize: 9, fontFace: FONT, align: 'right', fill: { color: DARK } } }
+]];
+const leadChData = [
+  ['Meta Ads', '161', '55,3%', '74', '+117,6%', '3.826 €', '+10,6%'],
+  ['Google Ads', '63', '21,6%', '48', '+31,3%', '5.193 €', '+101,7%'],
+  ['Organico', '34', '11,7%', '52', '-34,6%', '-', '-'],
+  ['Diretto e altro', '33', '11,3%', '27', '+22,2%', '-', '-']
+];
+const leadChTotals = [[
+  { text: 'Totale', options: { bold: true, fontSize: 10, fontFace: FONT, color: DARK, fill: { color: LGRAY } } },
+  { text: '291', options: { bold: true, fontSize: 10, fontFace: FONT, color: DARK, align: 'right', fill: { color: LGRAY } } },
+  { text: '100%', options: { bold: true, fontSize: 10, fontFace: FONT, color: DARK, align: 'right', fill: { color: LGRAY } } },
+  { text: '201', options: { bold: true, fontSize: 10, fontFace: FONT, color: DARK, align: 'right', fill: { color: LGRAY } } },
+  { text: '+44,8%', options: { bold: true, fontSize: 10, fontFace: FONT, color: GREEN, align: 'right', fill: { color: LGRAY } } },
+  { text: '9.019 €', options: { bold: true, fontSize: 10, fontFace: FONT, color: DARK, align: 'right', fill: { color: LGRAY } } },
+  { text: '+48,3%', options: { bold: true, fontSize: 10, fontFace: FONT, color: RED, align: 'right', fill: { color: LGRAY } } }
+]];
+
+const leadChRows = [
+  ...leadChHeader,
+  ...leadChData.map((row, i) => row.map((cell, j) => ({
+    text: cell,
+    options: {
+      fontSize: 10, fontFace: FONT,
+      color: (j === 4 || j === 6) && cell.startsWith('+') ? GREEN : (j === 4 || j === 6) && cell.startsWith('-') ? RED : DARK,
+      align: j > 0 ? 'right' : 'left',
+      fill: { color: i % 2 === 0 ? WHITE : LGRAY }
+    }
+  }))),
+  ...leadChTotals
+];
+
+s12b.addTable(leadChRows, {
+  x: 5.5, y: 1.7, w: 7.3,
+  border: { type: 'none' },
+  colW: [1.4, 0.9, 0.8, 0.9, 0.9, 1.0, 0.9],
+  rowH: [0.35, 0.35, 0.35, 0.35, 0.35, 0.4],
+  autoPage: false
+});
+
+s12b.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.5, y: 5.9, w: 12.3, h: 0.8, rectRadius: 0.08, fill: { color: 'FFF0EF' } });
+s12b.addText([
+  { text: 'Meta Ads: CPL 23,8 € (161 lead con 3.826 €) ', options: { bold: true, color: RED } },
+  { text: 'vs ', options: { color: GRAY } },
+  { text: 'Google Ads: CPL 82,4 € (63 lead con 5.193 €). ', options: { bold: true, color: RED } },
+  { text: 'Meta porta il 55% delle lead con il 42% del budget, confermandosi il canale paid piu efficiente per la generazione di contatti.', options: { color: GRAY } }
+], {
+  x: 0.7, y: 5.95, w: 11.8, h: 0.7,
+  fontSize: 10, fontFace: FONT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3
+});
+addFooter(s12b, 'Fonte dati: GA4 (lead event), Google Ads, Meta Ads | Periodo: set 2026 vs set 2025');
+
+// =============================================
 // SLIDE 13 - LEAD GENERATION | DETTAGLIO (table)
 // =============================================
 const s13 = pres.addSlide({ sectionTitle: 'Lead Generation' });
@@ -730,18 +896,12 @@ addFooter(s13, 'Fonte dati: HubSpot, MyArea | Periodo: set 2026 vs set 2025');
 // =============================================
 const s14 = pres.addSlide({ sectionTitle: 'Lead Generation' });
 addSlideBase(s14, 'LEAD GENERATION | FOCUS RIVENDITORI');
-addTitle(s14, 'La landing rivenditori raccoglie 215 preventivi con Google e Meta come driver del traffico');
+addTitle(s14, '215 preventivi dalla landing rivenditori: Meta porta 120 lead, Google 26');
 
-s14.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.5, y: 1.7, w: 12.3, h: 1.4, rectRadius: 0.1, fill: { color: DARK } });
-s14.addText('PREVENTIVI LANDING RIVENDITORI', { x: 0.8, y: 1.85, w: 5, h: 0.25, fontSize: 9, fontFace: FONT, bold: true, color: 'AAAAAA', isTextBox: true, margin: 0 });
-s14.addText('215', { x: 0.8, y: 2.15, w: 2.5, h: 0.7, fontSize: 52, fontFace: FONT, bold: true, color: WHITE, isTextBox: true, margin: 0 });
-s14.addText('preventivi compilati', { x: 3.5, y: 2.35, w: 4, h: 0.4, fontSize: 16, fontFace: FONT, color: 'CCCCCC', isTextBox: true, margin: 0 });
-s14.addText('NUOVO CANALE', { x: 10.0, y: 2.2, w: 2.5, h: 0.5, fontSize: 16, fontFace: FONT, bold: true, color: RED, align: 'right', isTextBox: true, margin: 0 });
-
-s14.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.5, y: 3.4, w: 5.9, h: 3.2, rectRadius: 0.1, fill: { color: LGRAY } });
-s14.addShape(pres.shapes.RECTANGLE, { x: 0.5, y: 3.4, w: 5.9, h: 0.08, fill: { color: RED } });
-s14.addText('Campagna Google Ads', { x: 0.8, y: 3.6, w: 5, h: 0.35, fontSize: 14, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
-s14.addText('DG Conversion Lead Gen', { x: 0.8, y: 3.95, w: 5, h: 0.25, fontSize: 10, fontFace: FONT, color: GRAY, isTextBox: true, margin: 0 });
+s14.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.5, y: 1.7, w: 5.9, h: 4.7, rectRadius: 0.1, fill: { color: LGRAY } });
+s14.addShape(pres.shapes.RECTANGLE, { x: 0.5, y: 1.7, w: 5.9, h: 0.08, fill: { color: RED } });
+s14.addText('Campagna Google Ads', { x: 0.8, y: 1.9, w: 5, h: 0.35, fontSize: 14, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
+s14.addText('DG Conversion Lead Gen', { x: 0.8, y: 2.25, w: 5, h: 0.25, fontSize: 10, fontFace: FONT, color: GRAY, isTextBox: true, margin: 0 });
 
 const gLeadKpis = [
   { k: 'IMPRESSION', v: '64.777' },
@@ -750,15 +910,24 @@ const gLeadKpis = [
   { k: 'CPC', v: '0,28 €' }
 ];
 gLeadKpis.forEach((kpi, i) => {
-  const y = 4.5 + i * 0.5;
+  const y = 2.8 + i * 0.55;
   s14.addText(kpi.k, { x: 0.8, y: y, w: 1.8, h: 0.2, fontSize: 8, fontFace: FONT, bold: true, color: GRAY, isTextBox: true, margin: 0 });
   s14.addText(kpi.v, { x: 2.8, y: y - 0.02, w: 2.5, h: 0.28, fontSize: 15, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
 });
 
-s14.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 6.8, y: 3.4, w: 5.9, h: 3.2, rectRadius: 0.1, fill: { color: LGRAY } });
-s14.addShape(pres.shapes.RECTANGLE, { x: 6.8, y: 3.4, w: 5.9, h: 0.08, fill: { color: BLUE } });
-s14.addText('Campagna Meta Ads', { x: 7.1, y: 3.6, w: 5, h: 0.35, fontSize: 14, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
-s14.addText('Lead Gen Rivenditori DEF', { x: 7.1, y: 3.95, w: 5, h: 0.25, fontSize: 10, fontFace: FONT, color: GRAY, isTextBox: true, margin: 0 });
+s14.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.8, y: 5.0, w: 5.3, h: 0.9, rectRadius: 0.08, fill: { color: 'FFF0EF' } });
+s14.addText([
+  { text: '~26 ', options: { fontSize: 24, bold: true, color: RED } },
+  { text: 'lead attribuite (GA4)', options: { fontSize: 11, color: DARK } }
+], { x: 1.0, y: 5.0, w: 4.8, h: 0.45, fontFace: FONT, isTextBox: true, margin: 0 });
+s14.addText('Paid Search 9 + Cross-network 17', {
+  x: 1.0, y: 5.45, w: 4.8, h: 0.3, fontSize: 9, fontFace: FONT, color: GRAY, isTextBox: true, margin: 0
+});
+
+s14.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 6.8, y: 1.7, w: 5.9, h: 4.7, rectRadius: 0.1, fill: { color: LGRAY } });
+s14.addShape(pres.shapes.RECTANGLE, { x: 6.8, y: 1.7, w: 5.9, h: 0.08, fill: { color: BLUE } });
+s14.addText('Campagna Meta Ads', { x: 7.1, y: 1.9, w: 5, h: 0.35, fontSize: 14, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
+s14.addText('Lead Gen Rivenditori DEF', { x: 7.1, y: 2.25, w: 5, h: 0.25, fontSize: 10, fontFace: FONT, color: GRAY, isTextBox: true, margin: 0 });
 
 const mLeadKpis = [
   { k: 'REACH', v: '36.082' },
@@ -767,11 +936,25 @@ const mLeadKpis = [
   { k: 'CTR', v: '1,92%' }
 ];
 mLeadKpis.forEach((kpi, i) => {
-  const y = 4.5 + i * 0.5;
+  const y = 2.8 + i * 0.55;
   s14.addText(kpi.k, { x: 7.1, y: y, w: 1.8, h: 0.2, fontSize: 8, fontFace: FONT, bold: true, color: GRAY, isTextBox: true, margin: 0 });
   s14.addText(kpi.v, { x: 9.1, y: y - 0.02, w: 2.5, h: 0.28, fontSize: 15, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
 });
-addFooter(s14, 'Fonte dati: HubSpot, Google Ads, Meta Ads | Periodo: set 2026');
+
+s14.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 7.1, y: 5.0, w: 5.3, h: 0.9, rectRadius: 0.08, fill: { color: 'FFF0EF' } });
+s14.addText([
+  { text: '120 ', options: { fontSize: 24, bold: true, color: RED } },
+  { text: 'lead attribuite (GA4)', options: { fontSize: 11, color: DARK } }
+], { x: 7.3, y: 5.0, w: 4.8, h: 0.45, fontFace: FONT, isTextBox: true, margin: 0 });
+s14.addText('Paid Social, submit_contact_form_lp', {
+  x: 7.3, y: 5.45, w: 4.8, h: 0.3, fontSize: 9, fontFace: FONT, color: GRAY, isTextBox: true, margin: 0
+});
+
+s14.addText('Il totale HubSpot (215 preventivi) supera le lead tracciate in GA4 perche include compilazioni da utenti di ritorno, organico e diretto non sempre attribuibili ai canali paid.', {
+  x: 0.5, y: 6.2, w: 12.3, h: 0.5,
+  fontSize: 10, fontFace: FONT, color: GRAY, isTextBox: true, margin: 0
+});
+addFooter(s14, 'Fonte dati: GA4, HubSpot, Google Ads, Meta Ads | Periodo: set 2026');
 
 // =============================================
 // SLIDE 15 - DIVIDER: FOCUS MAGAZINE
@@ -1002,88 +1185,6 @@ seoRecap.forEach((item, i) => {
   });
 });
 addFooter(s21, '');
-
-// =============================================
-// SLIDE 22 - PROSSIMI PASSI
-// =============================================
-const s22 = pres.addSlide({ sectionTitle: 'In chiusura' });
-addSlideBase(s22, 'PROSSIMI PASSI');
-addTitle(s22, 'Le attività prioritarie per i prossimi mesi');
-
-const nextSteps = [
-  { title: 'CONTENUTI DEMAND GEN', text: 'Definire i filoni editoriali da veicolare nelle campagne DG Traffico, capitalizzando sull\'efficienza del canale (CPC 0,06 €).' },
-  { title: 'MONITORAGGIO AI OVERVIEW', text: 'Continuare a monitorare l\'impatto di AI Overview sui contenuti del magazine e valutare strategie di contenuto per mitigare l\'erosione del CTR.' },
-  { title: 'OTTIMIZZAZIONE BUDGET PAID', text: 'Valutare l\'allocazione del budget sui canali paid in vista della stagione autunnale, in particolare il mix tra Google Ads e Meta Ads.' },
-  { title: 'LANDING RIVENDITORI', text: 'Ottimizzare la landing page rivenditori sulla base dei 215 preventivi raccolti nel primo mese e migliorare il tasso di conversione.' }
-];
-
-nextSteps.forEach((step, i) => {
-  const y = 1.6 + i * 1.3;
-  s22.addShape(pres.shapes.ROUNDED_RECTANGLE, {
-    x: 0.5, y: y, w: 12.3, h: 1.1, rectRadius: 0.08,
-    fill: { color: i === 0 ? 'FFF0EF' : LGRAY }
-  });
-  s22.addShape(pres.shapes.RECTANGLE, { x: 0.5, y: y, w: 0.06, h: 1.1, fill: { color: RED } });
-  s22.addText(step.title, {
-    x: 0.85, y: y + 0.1, w: 11, h: 0.3,
-    fontSize: 11, fontFace: FONT, bold: true, color: RED, isTextBox: true, margin: 0
-  });
-  s22.addText(step.text, {
-    x: 0.85, y: y + 0.45, w: 11.5, h: 0.5,
-    fontSize: 10, fontFace: FONT, color: GRAY, isTextBox: true, margin: 0
-  });
-});
-addFooter(s22, '');
-
-// =============================================
-// SLIDE 23 - CONTATTI
-// =============================================
-pres.addSection({ title: 'Contatti' });
-const s23 = pres.addSlide({ sectionTitle: 'Contatti' });
-
-s23.addShape(pres.shapes.OVAL, { x: 4.5, y: 0.8, w: 0.6, h: 0.6, fill: { color: RED } });
-s23.addText('moca', {
-  x: 5.2, y: 0.8, w: 3, h: 0.6,
-  fontSize: 36, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0
-});
-
-const team = [
-  { name: 'Federico Rugger', role: 'Project Account', email: 'federico.rugger@mocainteractive.com' },
-  { name: 'Valeria Pompili', role: 'Digital Advertising Specialist', email: 'valeria.pompili@mocainteractive.com' },
-  { name: 'Daniele Bertini', role: 'Digital Analytics Specialist', email: 'daniele.bertini@mocainteractive.com' },
-  { name: 'Alessio Trombone', role: 'Digital Advertising Specialist', email: 'alessio.trombone@mocainteractive.com' },
-  { name: 'Tommaso Minello', role: 'SEO Specialist', email: 'tommaso.minello@mocainteractive.com' }
-];
-
-team.forEach((t, i) => {
-  const col = i < 3 ? 0 : 1;
-  const row = i < 3 ? i : i - 3;
-  const x = 0.8 + col * 4.5;
-  const y = 2.2 + row * 1.4;
-  s23.addText(t.name, {
-    x: x, y: y, w: 4, h: 0.3,
-    fontSize: 14, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0
-  });
-  s23.addText(t.role, {
-    x: x, y: y + 0.3, w: 4, h: 0.25,
-    fontSize: 10, fontFace: FONT, color: GRAY, isTextBox: true, margin: 0
-  });
-  s23.addText(t.email, {
-    x: x, y: y + 0.55, w: 4, h: 0.25,
-    fontSize: 10, fontFace: FONT, color: RED, isTextBox: true, margin: 0
-  });
-});
-
-s23.addText('MOCA Interactive S.r.l. Società Benefit | Via Cernaia, 2 - 35141 Padova | P.IVA 04230520287', {
-  x: 0.5, y: 6.8, w: 12, h: 0.3,
-  fontSize: 7, fontFace: FONT, color: 'AAAAAA', align: 'center', isTextBox: true, margin: 0
-});
-
-s23.addShape(pres.shapes.OVAL, { x: 12.35, y: 7.0, w: 0.18, h: 0.18, fill: { color: RED } });
-s23.addText('moca', {
-  x: 12.57, y: 6.95, w: 0.55, h: 0.25,
-  fontSize: 10, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0
-});
 
 // =============================================
 // WRITE FILE
