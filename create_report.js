@@ -400,20 +400,21 @@ s6b.addText([
 addFooter(s6b, 'Fonte dati: Google Search Console | Periodo: set 2026 vs set 2025');
 
 // =============================================
-// SLIDE 7 - FOCUS ADVERTISING | PANORAMICA (3-column)
+// SLIDE 7 - FOCUS ADVERTISING | PANORAMICA (2-column paid only)
 // =============================================
 const s7 = pres.addSlide({ sectionTitle: 'Andamento e risultati' });
 addSlideBase(s7, 'TRAFFICO AL SITO | FOCUS ADVERTISING');
-addTitle(s7, 'Google consolida la crescita, Meta mantiene i volumi, Pinterest cresce del 22%');
+addTitle(s7, 'Google quadruplica i clic (+465%), Meta mantiene i volumi con CPC stabile');
 
-const platforms = [
+const paidPlatforms = [
   {
     name: 'GOOGLE ADS', color: RED,
     metrics: [
       { k: 'Clic', v: '44.231', d: '+465%' },
       { k: 'Impression', v: '465.037', d: '+552%' },
       { k: 'Investimento', v: '5.193 €', d: '+102%' },
-      { k: 'CPC medio', v: '0,12 €', d: '-64%' }
+      { k: 'CPC medio', v: '0,12 €', d: '-64%' },
+      { k: 'Quota traffico paid', v: '57,6%', d: '' }
     ]
   },
   {
@@ -422,41 +423,33 @@ const platforms = [
       { k: 'Link clic', v: '12.970', d: '-6,7%' },
       { k: 'Reach', v: '663.579', d: '-8,0%' },
       { k: 'Investimento', v: '3.826 €', d: '+10,6%' },
-      { k: 'CPC medio', v: '0,30 €', d: '+18,5%' }
-    ]
-  },
-  {
-    name: 'PINTEREST', color: PINK,
-    metrics: [
-      { k: 'Sessioni', v: '1.653', d: '+22,1%' },
-      { k: 'Sessioni 2025', v: '1.354', d: '' },
-      { k: 'Canale', v: 'Organico', d: '' },
-      { k: 'Quota traffico', v: '6,4%', d: '' }
+      { k: 'CPC medio', v: '0,30 €', d: '+18,5%' },
+      { k: 'Quota traffico paid', v: '42,4%', d: '' }
     ]
   }
 ];
 
-platforms.forEach((p, i) => {
-  const x = 0.5 + i * 4.2;
+paidPlatforms.forEach((p, i) => {
+  const x = 0.5 + i * 6.3;
   s7.addShape(pres.shapes.ROUNDED_RECTANGLE, {
-    x: x, y: 1.7, w: 3.9, h: 0.55, rectRadius: 0.08, fill: { color: p.color }
+    x: x, y: 1.7, w: 5.9, h: 0.6, rectRadius: 0.08, fill: { color: p.color }
   });
   s7.addText(p.name, {
-    x: x + 0.15, y: 1.75, w: 3.5, h: 0.4,
-    fontSize: 14, fontFace: FONT, bold: true, color: WHITE, isTextBox: true, margin: 0
+    x: x + 0.2, y: 1.75, w: 5, h: 0.5,
+    fontSize: 16, fontFace: FONT, bold: true, color: WHITE, isTextBox: true, margin: 0
   });
   s7.addShape(pres.shapes.ROUNDED_RECTANGLE, {
-    x: x, y: 2.3, w: 3.9, h: 3.8, rectRadius: 0.08, fill: { color: LGRAY }
+    x: x, y: 2.35, w: 5.9, h: 3.75, rectRadius: 0.08, fill: { color: LGRAY }
   });
   p.metrics.forEach((m, j) => {
-    const y = 2.5 + j * 0.9;
+    const y = 2.55 + j * 0.72;
     s7.addText(m.k.toUpperCase(), {
-      x: x + 0.2, y: y, w: 3, h: 0.2,
+      x: x + 0.25, y: y, w: 3, h: 0.2,
       fontSize: 8, fontFace: FONT, bold: true, color: GRAY, isTextBox: true, margin: 0
     });
     s7.addText(m.v, {
-      x: x + 0.2, y: y + 0.2, w: 2.0, h: 0.4,
-      fontSize: 20, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0
+      x: x + 0.25, y: y + 0.2, w: 2.5, h: 0.4,
+      fontSize: 22, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0
     });
     if (m.d) {
       const isPositive = m.d.startsWith('+');
@@ -464,18 +457,18 @@ platforms.forEach((p, i) => {
       let deltaColor = isPositive ? GREEN : RED;
       if (isCPC) deltaColor = isPositive ? RED : GREEN;
       s7.addText(m.d, {
-        x: x + 2.3, y: y + 0.2, w: 1.3, h: 0.4,
-        fontSize: 13, fontFace: FONT, bold: true, color: deltaColor, align: 'right', isTextBox: true, margin: 0
+        x: x + 3.2, y: y + 0.2, w: 2.2, h: 0.4,
+        fontSize: 14, fontFace: FONT, bold: true, color: deltaColor, align: 'right', isTextBox: true, margin: 0
       });
     }
   });
 });
 
-s7.addText('Investimento totale settembre 2026: 9.019 € (Google 5.193 € + Meta 3.826 €)', {
+s7.addText('Investimento totale settembre 2026: 9.019 € (Google 57,6% + Meta 42,4%)', {
   x: 0.5, y: 6.3, w: 12, h: 0.4,
   fontSize: 11, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0
 });
-addFooter(s7, 'Fonte dati: Google Ads, Meta Ads, GA4 | Periodo: set 2026 vs set 2025');
+addFooter(s7, 'Fonte dati: Google Ads, Meta Ads | Periodo: set 2026 vs set 2025');
 
 // =============================================
 // SLIDE 8 - GOOGLE ADS | DETTAGLIO
@@ -525,29 +518,35 @@ s8.addTable(gadsRows, {
   autoPage: false
 });
 
+s8.addText('DISTRIBUZIONE CLIC PER CAMPAGNA', {
+  x: 0.5, y: 4.5, w: 5, h: 0.25,
+  fontSize: 9, fontFace: FONT, bold: true, color: RED, isTextBox: true, margin: 0
+});
+
 s8.addChart(pres.charts.BAR, [
-  { name: 'Investimento (€)', labels: ['Search Generic', 'DG Traffico', 'DG Lead Gen', 'Brand Product', 'Brand Prot.'], values: [2827, 1251, 636, 240, 239] }
+  { name: 'Clic', labels: ['DG Traffico', 'Search Generic', 'Brand Prot.', 'DG Lead Gen', 'Brand Product'], values: [19737, 17384, 2911, 2288, 1911] }
 ], {
-  x: 0.5, y: 4.6, w: 7.5, h: 2.0,
+  x: 0.5, y: 4.75, w: 7.5, h: 1.8,
   showTitle: false,
-  barDir: 'col', barGrouping: 'clustered',
+  barDir: 'bar', barGrouping: 'clustered',
   chartColors: [RED],
   showValue: true, dataLabelPosition: 'outEnd', dataLabelColor: DARK, dataLabelFontSize: 8, dataLabelFontFace: '+mn-lt',
   showLegend: false,
   catAxisLabelColor: GRAY, catAxisLabelFontSize: 8, catAxisLabelFontFace: '+mn-lt',
   valAxisHidden: true,
-  valGridLine: { style: 'none' }, catGridLine: { style: 'none' }
+  valGridLine: { style: 'none' }, catGridLine: { style: 'none' },
+  catAxisOrientation: 'maxMin'
 });
 
-s8.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 8.5, y: 4.6, w: 4.3, h: 2.0, rectRadius: 0.08, fill: { color: LGRAY } });
-s8.addText('YOY HIGHLIGHTS', { x: 8.7, y: 4.7, w: 3.5, h: 0.3, fontSize: 9, fontFace: FONT, bold: true, color: RED, isTextBox: true, margin: 0 });
+s8.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 8.5, y: 4.5, w: 4.3, h: 2.1, rectRadius: 0.08, fill: { color: LGRAY } });
+s8.addText('YOY HIGHLIGHTS', { x: 8.7, y: 4.6, w: 3.5, h: 0.3, fontSize: 9, fontFace: FONT, bold: true, color: RED, isTextBox: true, margin: 0 });
 s8.addText([
   { text: 'Clic +465%', options: { bold: true, breakLine: true, fontSize: 11 } },
   { text: 'Investimento +102% (da 2.573 a 5.193 €)', options: { breakLine: true, fontSize: 10 } },
   { text: 'CPC -64% (da 0,33 a 0,12 €)', options: { breakLine: true, fontSize: 10 } },
   { text: 'Demand Gen non era attivo nel 2025', options: { fontSize: 10, italic: true } }
 ], {
-  x: 8.7, y: 5.05, w: 3.9, h: 1.5,
+  x: 8.7, y: 4.95, w: 3.9, h: 1.5,
   fontFace: FONT, color: DARK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.4
 });
 addFooter(s8, 'Fonte dati: Google Ads | Periodo: set 2026 vs set 2025');
@@ -599,30 +598,35 @@ s9.addTable(metaRows, {
   autoPage: false
 });
 
+s9.addText('CPC PER CAMPAGNA (€)', {
+  x: 0.5, y: 4.4, w: 5, h: 0.25,
+  fontSize: 9, fontFace: FONT, bold: true, color: BLUE, isTextBox: true, margin: 0
+});
+
 s9.addChart(pres.charts.BAR, [
-  { name: 'Investimento (€)', labels: ['Lead Gen Riv.', 'Blog Consid.', 'FEEL5 B2B', 'Area Pro B2B', 'Promo PED', 'Store Locator'], values: [1108, 1061, 572, 556, 292, 237] }
+  { name: 'CPC', labels: ['Store Locator', 'Blog Consid.', 'Lead Gen Riv.', 'Promo PED', 'FEEL5 B2B', 'Area Pro B2B'], values: [0.11, 0.15, 0.48, 0.68, 0.99, 1.13] }
 ], {
-  x: 0.5, y: 4.5, w: 7.5, h: 2.0,
+  x: 0.5, y: 4.65, w: 7.5, h: 2.0,
   showTitle: false,
   barDir: 'bar', barGrouping: 'clustered',
   chartColors: [BLUE],
-  showValue: true, dataLabelPosition: 'outEnd', dataLabelColor: DARK, dataLabelFontSize: 8, dataLabelFontFace: '+mn-lt',
+  showValue: true, dataLabelPosition: 'outEnd', dataLabelColor: DARK, dataLabelFontSize: 9, dataLabelFontFace: '+mn-lt',
   showLegend: false,
   catAxisLabelColor: GRAY, catAxisLabelFontSize: 8, catAxisLabelFontFace: '+mn-lt',
   valAxisHidden: true,
   valGridLine: { style: 'none' }, catGridLine: { style: 'none' },
-  catAxisOrientation: 'maxMin'
+  catAxisOrientation: 'minMax'
 });
 
-s9.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 8.5, y: 4.5, w: 4.3, h: 2.0, rectRadius: 0.08, fill: { color: LGRAY } });
-s9.addText('INSIGHT', { x: 8.7, y: 4.6, w: 3.5, h: 0.3, fontSize: 9, fontFace: FONT, bold: true, color: RED, isTextBox: true, margin: 0 });
+s9.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 8.5, y: 4.4, w: 4.3, h: 2.2, rectRadius: 0.08, fill: { color: LGRAY } });
+s9.addText('INSIGHT', { x: 8.7, y: 4.5, w: 3.5, h: 0.3, fontSize: 9, fontFace: FONT, bold: true, color: RED, isTextBox: true, margin: 0 });
 s9.addText([
-  { text: 'Blog Consideration', options: { bold: true, breakLine: true, fontSize: 11 } },
-  { text: 'Porta il volume maggiore (7.059 clic) con CPC 0,15 €', options: { breakLine: true, fontSize: 10 } },
-  { text: '\nStore Locator B2C', options: { bold: true, breakLine: true, fontSize: 11 } },
-  { text: 'Il CPC più efficiente in assoluto: 0,11 €', options: { fontSize: 10 } }
+  { text: 'CPC: spread 10x tra le campagne', options: { bold: true, breakLine: true, fontSize: 11 } },
+  { text: 'Store Locator (0,11 €) e Blog (0,15 €) sono i piu efficienti per clic', options: { breakLine: true, fontSize: 10 } },
+  { text: '\nLead Gen e B2B hanno CPC piu alti', options: { bold: true, breakLine: true, fontSize: 11 } },
+  { text: 'ma portano conversioni dirette (lead, registrazioni)', options: { fontSize: 10 } }
 ], {
-  x: 8.7, y: 4.9, w: 3.9, h: 1.5,
+  x: 8.7, y: 4.85, w: 3.9, h: 1.6,
   fontFace: FONT, color: DARK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3
 });
 addFooter(s9, 'Fonte dati: Meta Ads | Periodo: set 2026');
