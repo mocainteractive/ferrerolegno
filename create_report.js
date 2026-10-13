@@ -400,6 +400,60 @@ s6b.addText([
 addFooter(s6b, 'Fonte dati: Google Search Console | Periodo: set 2026 vs set 2025');
 
 // =============================================
+// SLIDE 6C - CORRELAZIONE BRAND SEARCH E TRAFFICO DIRETTO
+// =============================================
+const s6c = pres.addSlide({ sectionTitle: 'Andamento e risultati' });
+addSlideBase(s6c, 'TRAFFICO ORGANICO | CORRELAZIONE');
+addTitle(s6c, 'Le ricerche brand crollano fino al -53%, il traffico diretto segue a -4,7%: segnale di erosione della notorieta');
+
+s6c.addText('CALO RICERCHE BRAND (GSC)', {
+  x: 0.5, y: 1.7, w: 6, h: 0.3,
+  fontSize: 10, fontFace: FONT, bold: true, color: RED, isTextBox: true, margin: 0
+});
+
+const brandDecline = [
+  { query: '"ferrero legno"', val: '-52,7%', from: '537', to: '254' },
+  { query: '"ferrero porte"', val: '-34,3%', from: '367', to: '241' },
+  { query: '"ferrerolegno"', val: '-41,9%', from: '167', to: '97' }
+];
+brandDecline.forEach((b, i) => {
+  const y = 2.15 + i * 1.1;
+  s6c.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.5, y: y, w: 5.9, h: 0.95, rectRadius: 0.08, fill: { color: LGRAY } });
+  s6c.addText(b.query, { x: 0.7, y: y + 0.08, w: 3.5, h: 0.25, fontSize: 11, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
+  s6c.addText(b.val, { x: 4.2, y: y + 0.05, w: 2, h: 0.35, fontSize: 22, fontFace: FONT, bold: true, color: RED, align: 'right', isTextBox: true, margin: 0 });
+  s6c.addText('da ' + b.from + ' a ' + b.to + ' clic', { x: 0.7, y: y + 0.45, w: 5, h: 0.25, fontSize: 9, fontFace: FONT, color: GRAY, isTextBox: true, margin: 0 });
+});
+
+s6c.addText('IMPATTO SUL TRAFFICO', {
+  x: 6.8, y: 1.7, w: 6, h: 0.3,
+  fontSize: 10, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0
+});
+
+const trafficImpact = [
+  { label: 'TRAFFICO DIRETTO', val: '-4,7%', sub: '1.914 vs 2.009 sessioni', desc: 'Chi conosce il brand e naviga direttamente cala, in linea con la minore notorieta.' },
+  { label: 'ORGANIC SEARCH', val: '-4,0%', sub: '4.271 vs 4.448 sessioni', desc: 'Il calo e contenuto grazie al miglioramento del posizionamento (+4 pos.), che compensa la domanda inferiore.' },
+  { label: 'IMPRESSION GSC', val: '+12,1%', sub: '220.993 vs 197.214', desc: 'Il sito e piu visibile, ma l\'AI Overview intercetta i clic prima che arrivino al sito.' }
+];
+trafficImpact.forEach((t, i) => {
+  const y = 2.15 + i * 1.1;
+  s6c.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 6.8, y: y, w: 5.9, h: 0.95, rectRadius: 0.08, fill: { color: LGRAY } });
+  s6c.addText(t.label, { x: 7.0, y: y + 0.05, w: 3, h: 0.25, fontSize: 8, fontFace: FONT, bold: true, color: GRAY, isTextBox: true, margin: 0 });
+  s6c.addText(t.val, { x: 10.4, y: y + 0.02, w: 2, h: 0.35, fontSize: 22, fontFace: FONT, bold: true, color: t.val.startsWith('+') ? GREEN : RED, align: 'right', isTextBox: true, margin: 0 });
+  s6c.addText(t.sub, { x: 7.0, y: y + 0.35, w: 5.5, h: 0.2, fontSize: 9, fontFace: FONT, color: GRAY, isTextBox: true, margin: 0 });
+  s6c.addText(t.desc, { x: 7.0, y: y + 0.55, w: 5.5, h: 0.3, fontSize: 9, fontFace: FONT, color: GRAY, italic: true, isTextBox: true, margin: 0 });
+});
+
+s6c.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.5, y: 5.6, w: 12.3, h: 1.1, rectRadius: 0.08, fill: { color: 'FFF0EF' } });
+s6c.addText([
+  { text: 'La correlazione e chiara: ', options: { bold: true, color: RED } },
+  { text: 'meno ricerche brand (-40/53%) significano meno clic organici e meno visite dirette. Tuttavia, il miglioramento del posizionamento e la crescita delle impression (+12,1%) suggeriscono che il sito sta guadagnando visibilita su query non-brand, compensando parzialmente il calo. L\'investimento paid diventa sempre piu strategico per mantenere il flusso di traffico.', options: { color: GRAY } }
+], {
+  x: 0.7, y: 5.65, w: 11.8, h: 1.0,
+  fontSize: 10, fontFace: FONT, isTextBox: true, margin: 0, lineSpacingMultiple: 1.3
+});
+addFooter(s6c, 'Fonte dati: GSC, GA4 | Periodo: set 2026 vs set 2025');
+
+// =============================================
 // SLIDE 7 - FOCUS ADVERTISING | PANORAMICA (2-column paid only)
 // =============================================
 const s7 = pres.addSlide({ sectionTitle: 'Andamento e risultati' });
@@ -632,69 +686,176 @@ s9.addText([
 addFooter(s9, 'Fonte dati: Meta Ads | Periodo: set 2026');
 
 // =============================================
-// SLIDE 10 - INVESTIMENTO ADV | ALLOCAZIONE
+// SLIDE 9B - QUALITA TRAFFICO PER CANALE
 // =============================================
-const s10 = pres.addSlide({ sectionTitle: 'Andamento e risultati' });
-addSlideBase(s10, 'INVESTIMENTO ADVERTISING | ALLOCAZIONE');
-addTitle(s10, 'Investimento totale 9.019 €: Google Ads assorbe il 57,6% del budget');
+const s9b = pres.addSlide({ sectionTitle: 'Andamento e risultati' });
+addSlideBase(s9b, 'TRAFFICO | QUALITA PER CANALE');
+addTitle(s9b, 'Paid Search domina per engagement (95,6%), Organic Search per profondita di navigazione (4,8 pagine)');
 
-s10.addText('9.019 €', {
-  x: 0.5, y: 1.8, w: 5, h: 1.0,
-  fontSize: 56, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0
-});
-s10.addText('INVESTIMENTO TOTALE SETTEMBRE 2026', {
-  x: 0.5, y: 2.75, w: 5, h: 0.3,
-  fontSize: 10, fontFace: FONT, bold: true, color: GRAY, isTextBox: true, margin: 0
+s9b.addText('ENGAGEMENT RATE PER CANALE (%)', {
+  x: 0.5, y: 1.65, w: 6, h: 0.25,
+  fontSize: 9, fontFace: FONT, bold: true, color: RED, isTextBox: true, margin: 0
 });
 
-s10.addChart(pres.charts.DOUGHNUT, [
-  { name: 'Allocazione', labels: ['Google Ads', 'Meta Ads'], values: [5193, 3826] }
+s9b.addChart(pres.charts.BAR, [
+  { name: 'Engagement Rate %', labels: ['Paid Search', 'Cross-network', 'Organic Social', 'Paid Social', 'Organic Search', 'Direct', 'Referral', 'Display'], values: [95.6, 89.1, 88.9, 82.6, 81.6, 78.9, 77.4, 60.3] }
 ], {
-  x: 0.0, y: 3.2, w: 5.5, h: 3.5,
+  x: 0.2, y: 1.9, w: 6.8, h: 3.6,
   showTitle: false,
-  chartColors: [RED, BLUE],
-  showLegend: true, legendPos: 'b', legendFontSize: 10, legendFontFace: '+mn-lt', legendColor: DARK,
-  showPercent: true,
-  dataLabelPosition: 'ctr',
-  dataLabelFontSize: 14,
-  dataLabelFontFace: '+mn-lt',
-  dataLabelColor: WHITE
+  barDir: 'bar', barGrouping: 'clustered',
+  chartColors: [RED],
+  showValue: true, dataLabelPosition: 'outEnd', dataLabelColor: DARK, dataLabelFontSize: 9, dataLabelFontFace: '+mn-lt',
+  showLegend: false,
+  catAxisLabelColor: GRAY, catAxisLabelFontSize: 9, catAxisLabelFontFace: '+mn-lt',
+  valAxisHidden: true,
+  valGridLine: { style: 'none' }, catGridLine: { style: 'none' },
+  catAxisOrientation: 'maxMin',
+  valAxisMaxVal: 110
 });
 
-const spendCards = [
-  { platform: 'GOOGLE ADS', spend: '5.193 €', pctLabel: '57,6% del budget', clic: '44.231', cpc: '0,12 €', color: RED, note: 'CPC in calo del 64%: il canale più efficiente per volumi' },
-  { platform: 'META ADS', spend: '3.826 €', pctLabel: '42,4% del budget', clic: '12.970', cpc: '0,30 €', color: BLUE, note: 'CPC stabile, Blog Consideration è il best performer' }
+// Right side table
+s9b.addText('DETTAGLIO METRICHE DI QUALITA', {
+  x: 7.3, y: 1.65, w: 5.5, h: 0.25,
+  fontSize: 9, fontFace: FONT, bold: true, color: RED, isTextBox: true, margin: 0
+});
+
+const qualHeader = [[
+  { text: 'Canale', options: { bold: true, color: WHITE, fontSize: 8, fontFace: FONT, fill: { color: DARK } } },
+  { text: 'Sessioni', options: { bold: true, color: WHITE, fontSize: 8, fontFace: FONT, align: 'right', fill: { color: DARK } } },
+  { text: 'Pag/sess', options: { bold: true, color: WHITE, fontSize: 8, fontFace: FONT, align: 'right', fill: { color: DARK } } },
+  { text: 'Durata', options: { bold: true, color: WHITE, fontSize: 8, fontFace: FONT, align: 'right', fill: { color: DARK } } }
+]];
+const qualData = [
+  ['Paid Search', '8.129', '4,73', '12m 09s'],
+  ['Paid Social', '5.933', '1,62', '4m 09s'],
+  ['Organic Search', '4.271', '4,80', '31m 39s'],
+  ['Cross-network', '3.917', '1,33', '1m 57s'],
+  ['Direct', '1.914', '3,66', '1h 48m'],
+  ['Referral', '239', '3,97', '34m 19s'],
+  ['Organic Social', '234', '2,59', '18m 37s'],
+  ['Display', '116', '1,28', '1m 24s']
+];
+const qualRows = [
+  ...qualHeader,
+  ...qualData.map((row, i) => row.map((cell, j) => ({
+    text: cell,
+    options: { fontSize: 8, fontFace: FONT, color: DARK, align: j > 0 ? 'right' : 'left', fill: { color: i % 2 === 0 ? WHITE : LGRAY } }
+  })))
 ];
 
-spendCards.forEach((c, i) => {
-  const x = 6.0;
-  const y = 1.8 + i * 2.8;
-  s10.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: x, y: y, w: 6.8, h: 2.4, rectRadius: 0.1, fill: { color: LGRAY } });
-  s10.addShape(pres.shapes.RECTANGLE, { x: x, y: y, w: 0.08, h: 2.4, fill: { color: c.color } });
-  s10.addText(c.platform, {
-    x: x + 0.3, y: y + 0.15, w: 3, h: 0.35,
-    fontSize: 13, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0
-  });
-  s10.addText(c.pctLabel, {
-    x: x + 3.5, y: y + 0.15, w: 3, h: 0.35,
-    fontSize: 11, fontFace: FONT, color: GRAY, align: 'right', isTextBox: true, margin: 0
-  });
-  const kpiDefs = [
-    { label: 'INVESTIMENTO', val: c.spend },
-    { label: 'CLIC', val: c.clic },
-    { label: 'CPC', val: c.cpc }
-  ];
-  kpiDefs.forEach((kd, j) => {
-    const kx = x + 0.3 + j * 2.2;
-    s10.addText(kd.label, { x: kx, y: y + 0.7, w: 2, h: 0.2, fontSize: 8, fontFace: FONT, bold: true, color: GRAY, isTextBox: true, margin: 0 });
-    s10.addText(kd.val, { x: kx, y: y + 0.95, w: 2, h: 0.5, fontSize: 22, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
-  });
-  s10.addText(c.note, {
-    x: x + 0.3, y: y + 1.7, w: 6, h: 0.4,
-    fontSize: 10, fontFace: FONT, italic: true, color: GRAY, isTextBox: true, margin: 0
-  });
+s9b.addTable(qualRows, {
+  x: 7.3, y: 1.95, w: 5.5,
+  border: { type: 'none' },
+  colW: [1.6, 0.9, 0.9, 1.2],
+  rowH: [0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3],
+  autoPage: false
 });
-addFooter(s10, 'Fonte dati: Google Ads, Meta Ads | Periodo: set 2026');
+
+// Bottom insight bar
+s9b.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.5, y: 5.8, w: 12.3, h: 0.9, rectRadius: 0.08, fill: { color: 'FFF0EF' } });
+s9b.addShape(pres.shapes.RECTANGLE, { x: 0.5, y: 5.8, w: 0.06, h: 0.9, fill: { color: RED } });
+s9b.addText([
+  { text: 'Paid Search porta il miglior engagement (95,6%) con 4,73 pagine per sessione. ', options: { fontSize: 10 } },
+  { text: 'Organic Search eccelle in profondita (4,80 pag.) e durata (31 min). ', options: { fontSize: 10, bold: true } },
+  { text: 'Paid Social ha volumi elevati (5.933 sessioni) ma engagement e profondita inferiori, segnalando traffico orientato all\'atterraggio sulla landing page.', options: { fontSize: 10 } }
+], {
+  x: 0.8, y: 5.85, w: 11.7, h: 0.8,
+  fontFace: FONT, color: DARK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.15
+});
+addFooter(s9b, 'Fonte dati: GA4 | Periodo: set 2026');
+
+// =============================================
+// SLIDE 10 - EFFICIENZA CROSS-PLATFORM
+// =============================================
+const s10 = pres.addSlide({ sectionTitle: 'Andamento e risultati' });
+addSlideBase(s10, 'ADVERTISING | EFFICIENZA CROSS-PLATFORM');
+addTitle(s10, 'Meta genera lead a 23,8 € (3,5x piu economico), Google porta traffico con engagement del 95,6%');
+
+// LEFT - CPL comparison
+s10.addText('COSTO PER LEAD (GA4 ATTRIBUTION)', {
+  x: 0.5, y: 1.65, w: 6, h: 0.25,
+  fontSize: 9, fontFace: FONT, bold: true, color: RED, isTextBox: true, margin: 0
+});
+
+// Meta CPL card
+s10.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.5, y: 2.0, w: 5.8, h: 1.8, rectRadius: 0.08, fill: { color: LGRAY } });
+s10.addShape(pres.shapes.RECTANGLE, { x: 0.5, y: 2.0, w: 0.06, h: 1.8, fill: { color: BLUE } });
+s10.addText('META ADS', { x: 0.8, y: 2.1, w: 2, h: 0.25, fontSize: 10, fontFace: FONT, bold: true, color: BLUE, isTextBox: true, margin: 0 });
+s10.addText('23,8 €', { x: 0.8, y: 2.4, w: 2.5, h: 0.6, fontSize: 36, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
+s10.addText('COSTO PER LEAD', { x: 0.8, y: 3.0, w: 2, h: 0.2, fontSize: 8, fontFace: FONT, color: GRAY, isTextBox: true, margin: 0 });
+const metaCplKpis = [
+  { label: 'LEAD', val: '161', kx: 3.4 },
+  { label: 'SPESA', val: '3.826 €', kx: 4.5 },
+  { label: '% LEAD TOT.', val: '55,3%', kx: 5.6 }
+];
+metaCplKpis.forEach(kpi => {
+  s10.addText(kpi.label, { x: kpi.kx, y: 2.15, w: 1.1, h: 0.15, fontSize: 7, fontFace: FONT, bold: true, color: GRAY, isTextBox: true, margin: 0 });
+  s10.addText(kpi.val, { x: kpi.kx, y: 2.35, w: 1.1, h: 0.4, fontSize: 16, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
+});
+s10.addText('Best performer per costo: Blog Consideration (CPC 0,15 €) e Store Locator (CPC 0,11 €) abbassano il CPL medio', {
+  x: 0.8, y: 3.25, w: 5.3, h: 0.35,
+  fontSize: 8, fontFace: FONT, italic: true, color: GRAY, isTextBox: true, margin: 0
+});
+
+// Google CPL card
+s10.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.5, y: 4.0, w: 5.8, h: 1.8, rectRadius: 0.08, fill: { color: LGRAY } });
+s10.addShape(pres.shapes.RECTANGLE, { x: 0.5, y: 4.0, w: 0.06, h: 1.8, fill: { color: RED } });
+s10.addText('GOOGLE ADS', { x: 0.8, y: 4.1, w: 2, h: 0.25, fontSize: 10, fontFace: FONT, bold: true, color: RED, isTextBox: true, margin: 0 });
+s10.addText('82,4 €', { x: 0.8, y: 4.4, w: 2.5, h: 0.6, fontSize: 36, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
+s10.addText('COSTO PER LEAD', { x: 0.8, y: 5.0, w: 2, h: 0.2, fontSize: 8, fontFace: FONT, color: GRAY, isTextBox: true, margin: 0 });
+const googleCplKpis = [
+  { label: 'LEAD', val: '63', kx: 3.4 },
+  { label: 'SPESA', val: '5.193 €', kx: 4.5 },
+  { label: '% LEAD TOT.', val: '21,6%', kx: 5.6 }
+];
+googleCplKpis.forEach(kpi => {
+  s10.addText(kpi.label, { x: kpi.kx, y: 4.15, w: 1.1, h: 0.15, fontSize: 7, fontFace: FONT, bold: true, color: GRAY, isTextBox: true, margin: 0 });
+  s10.addText(kpi.val, { x: kpi.kx, y: 4.35, w: 1.1, h: 0.4, fontSize: 16, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
+});
+s10.addText('CPL piu alto ma traffico di qualita superiore: Demand Gen ha il CPC piu basso (0,06 €) e genera volumi elevati', {
+  x: 0.8, y: 5.25, w: 5.3, h: 0.35,
+  fontSize: 8, fontFace: FONT, italic: true, color: GRAY, isTextBox: true, margin: 0
+});
+
+// RIGHT - Quality comparison
+s10.addText('QUALITA DEL TRAFFICO A CONFRONTO', {
+  x: 6.8, y: 1.65, w: 6, h: 0.25,
+  fontSize: 9, fontFace: FONT, bold: true, color: RED, isTextBox: true, margin: 0
+});
+
+const effComparisons = [
+  { metric: 'ENGAGEMENT RATE', google: '95,6%', meta: '82,6%', winner: 'google' },
+  { metric: 'PAGINE / SESSIONE', google: '4,73', meta: '1,62', winner: 'google' },
+  { metric: 'DURATA MEDIA SESSIONE', google: '12m 09s', meta: '4m 09s', winner: 'google' },
+  { metric: 'CLIC TOTALI', google: '44.231', meta: '12.970', winner: 'google' },
+  { metric: 'COSTO PER LEAD', google: '82,4 €', meta: '23,8 €', winner: 'meta' }
+];
+
+effComparisons.forEach((comp, i) => {
+  const y = 2.0 + i * 0.95;
+  s10.addText(comp.metric, {
+    x: 6.8, y: y, w: 6, h: 0.2,
+    fontSize: 8, fontFace: FONT, bold: true, color: GRAY, isTextBox: true, margin: 0
+  });
+  s10.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 6.8, y: y + 0.25, w: 3.0, h: 0.55, rectRadius: 0.06, fill: { color: comp.winner === 'google' ? 'FFE7E6' : LGRAY } });
+  s10.addText('Google', { x: 6.9, y: y + 0.27, w: 1.2, h: 0.15, fontSize: 7, fontFace: FONT, color: RED, isTextBox: true, margin: 0 });
+  s10.addText(comp.google, { x: 6.9, y: y + 0.42, w: 2.8, h: 0.3, fontSize: 16, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
+  s10.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 10.0, y: y + 0.25, w: 2.8, h: 0.55, rectRadius: 0.06, fill: { color: comp.winner === 'meta' ? 'E6EEFF' : LGRAY } });
+  s10.addText('Meta', { x: 10.1, y: y + 0.27, w: 1.2, h: 0.15, fontSize: 7, fontFace: FONT, color: BLUE, isTextBox: true, margin: 0 });
+  s10.addText(comp.meta, { x: 10.1, y: y + 0.42, w: 2.6, h: 0.3, fontSize: 16, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
+});
+
+// Bottom insight
+s10.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.5, y: 6.05, w: 12.3, h: 0.7, rectRadius: 0.08, fill: { color: 'FFF0EF' } });
+s10.addShape(pres.shapes.RECTANGLE, { x: 0.5, y: 6.05, w: 0.06, h: 0.7, fill: { color: RED } });
+s10.addText([
+  { text: 'Meta e Google svolgono ruoli complementari: ', options: { fontSize: 10, bold: true } },
+  { text: 'Meta e 3,5x piu efficiente per lead generation (55% delle lead a costo inferiore), mentre Google Ads porta utenti con il 95,6% di engagement e quasi 5 pagine per sessione, alimentando tutto il funnel.', options: { fontSize: 10 } }
+], {
+  x: 0.8, y: 6.1, w: 11.7, h: 0.6,
+  fontFace: FONT, color: DARK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.15
+});
+addFooter(s10, 'Fonte dati: GA4, Google Ads, Meta Ads | Periodo: set 2026');
 
 // =============================================
 // SLIDE 11 - DIVIDER: LEAD GENERATION
@@ -1066,50 +1227,194 @@ s17.addChart(pres.charts.BAR, [
 addFooter(s17, 'Fonte dati: Meta Ads, GA4 | Periodo: set 2026');
 
 // =============================================
-// SLIDE 18 - PINTEREST
+// SLIDE 17B - PROMO PED E CANALI SOCIAL
+// =============================================
+const s17b = pres.addSlide({ sectionTitle: 'Focus Magazine' });
+addSlideBase(s17b, 'SOCIAL | PROMO PED E CANALI ORGANICI');
+addTitle(s17b, 'Promo PED raggiunge 469K utenti unici con 292 €, i social organici portano 234 sessioni al sito');
+
+// LEFT - Promo PED
+s17b.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.5, y: 1.7, w: 6.2, h: 4.8, rectRadius: 0.1, fill: { color: LGRAY } });
+s17b.addShape(pres.shapes.RECTANGLE, { x: 0.5, y: 1.7, w: 0.06, h: 4.8, fill: { color: BLUE } });
+s17b.addText('PROMO PED (META ADS, AWARENESS)', { x: 0.8, y: 1.85, w: 5.5, h: 0.3, fontSize: 10, fontFace: FONT, bold: true, color: BLUE, isTextBox: true, margin: 0 });
+s17b.addText('Campagna always-on di brand awareness su Facebook e Instagram', {
+  x: 0.8, y: 2.2, w: 5.5, h: 0.3,
+  fontSize: 9, fontFace: FONT, italic: true, color: GRAY, isTextBox: true, margin: 0
+});
+
+const pedKpis = [
+  { label: 'IMPRESSION', val: '631.044', yoy: '+5,4%', good: true },
+  { label: 'REACH', val: '468.525', yoy: '+5,9%', good: true },
+  { label: 'FREQUENZA', val: '1,35', yoy: 'stabile', good: true },
+  { label: 'LINK CLIC', val: '429', yoy: '+18,8%', good: true },
+  { label: 'CTR', val: '0,07%', yoy: '+12,7%', good: true },
+  { label: 'CPC', val: '0,68 €', yoy: '-4,8%', good: true }
+];
+pedKpis.forEach((kpi, i) => {
+  const col = i % 3;
+  const row = Math.floor(i / 3);
+  const kx = 0.8 + col * 2.0;
+  const ky = 2.7 + row * 1.4;
+  s17b.addText(kpi.label, { x: kx, y: ky, w: 1.8, h: 0.15, fontSize: 7, fontFace: FONT, bold: true, color: GRAY, isTextBox: true, margin: 0 });
+  s17b.addText(kpi.val, { x: kx, y: ky + 0.2, w: 1.8, h: 0.5, fontSize: 22, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
+  const yoyColor = kpi.yoy === 'stabile' ? GRAY : GREEN;
+  s17b.addText(kpi.yoy + ' YoY', { x: kx, y: ky + 0.7, w: 1.8, h: 0.2, fontSize: 8, fontFace: FONT, bold: true, color: yoyColor, isTextBox: true, margin: 0 });
+});
+
+s17b.addShape(pres.shapes.RECTANGLE, { x: 0.8, y: 5.55, w: 5.5, h: 0.03, fill: { color: 'CCCCCC' } });
+s17b.addText('INVESTIMENTO: 292 € (+13,2% YoY) | 6 creative aggiornate nel mese (album, video, carousel, immagine)', {
+  x: 0.8, y: 5.7, w: 5.5, h: 0.35,
+  fontSize: 9, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0
+});
+s17b.addText('CPM di 0,46 €: tra le campagne piu efficienti per copertura', {
+  x: 0.8, y: 6.05, w: 5.5, h: 0.25,
+  fontSize: 9, fontFace: FONT, italic: true, color: GRAY, isTextBox: true, margin: 0
+});
+
+// RIGHT - Social organici
+s17b.addText('TRAFFICO SOCIAL ORGANICO AL SITO (GA4)', {
+  x: 7.0, y: 1.65, w: 6, h: 0.25,
+  fontSize: 9, fontFace: FONT, bold: true, color: RED, isTextBox: true, margin: 0
+});
+
+const socHeader = [[
+  { text: 'Canale', options: { bold: true, color: WHITE, fontSize: 8, fontFace: FONT, fill: { color: DARK } } },
+  { text: 'Set 2026', options: { bold: true, color: WHITE, fontSize: 8, fontFace: FONT, align: 'right', fill: { color: DARK } } },
+  { text: 'Set 2025', options: { bold: true, color: WHITE, fontSize: 8, fontFace: FONT, align: 'right', fill: { color: DARK } } },
+  { text: 'Var. %', options: { bold: true, color: WHITE, fontSize: 8, fontFace: FONT, align: 'right', fill: { color: DARK } } }
+]];
+const socData = [
+  { n: 'Facebook', v26: '177', v25: '351', yoy: '-49,6%', neg: true },
+  { n: 'Instagram', v26: '10', v25: '2', yoy: '+400%', neg: false },
+  { n: 'Pinterest (org.)', v26: '13', v25: '32', yoy: '-59,4%', neg: true },
+  { n: 'YouTube', v26: '2', v25: '0', yoy: 'nuovo', neg: false },
+  { n: 'Altro (bit.ly, houzz)', v26: '34', v25: '22', yoy: '+54,5%', neg: false }
+];
+const socRows = socData.map((r, i) => [
+  { text: r.n, options: { fontSize: 9, fontFace: FONT, color: DARK, fill: { color: i % 2 === 0 ? WHITE : LGRAY } } },
+  { text: r.v26, options: { fontSize: 9, fontFace: FONT, color: DARK, align: 'right', fill: { color: i % 2 === 0 ? WHITE : LGRAY } } },
+  { text: r.v25, options: { fontSize: 9, fontFace: FONT, color: DARK, align: 'right', fill: { color: i % 2 === 0 ? WHITE : LGRAY } } },
+  { text: r.yoy, options: { fontSize: 9, fontFace: FONT, bold: true, color: r.neg ? RED : GREEN, align: 'right', fill: { color: i % 2 === 0 ? WHITE : LGRAY } } }
+]);
+const socTotal = [[
+  { text: 'Totale Organic Social', options: { bold: true, fontSize: 9, fontFace: FONT, color: DARK, fill: { color: LGRAY } } },
+  { text: '234', options: { bold: true, fontSize: 9, fontFace: FONT, color: DARK, align: 'right', fill: { color: LGRAY } } },
+  { text: '410', options: { bold: true, fontSize: 9, fontFace: FONT, color: DARK, align: 'right', fill: { color: LGRAY } } },
+  { text: '-42,9%', options: { bold: true, fontSize: 9, fontFace: FONT, color: RED, align: 'right', fill: { color: LGRAY } } }
+]];
+
+s17b.addTable([...socHeader, ...socRows, ...socTotal], {
+  x: 7.0, y: 1.95, w: 5.8,
+  border: { type: 'none' },
+  colW: [2.0, 1.0, 1.0, 1.0],
+  rowH: [0.3, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35],
+  autoPage: false
+});
+
+// Right side - KPI cards for Instagram and YouTube
+s17b.addText('FOCUS: INSTAGRAM E YOUTUBE', {
+  x: 7.0, y: 4.55, w: 6, h: 0.25,
+  fontSize: 9, fontFace: FONT, bold: true, color: RED, isTextBox: true, margin: 0
+});
+
+s17b.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 7.0, y: 4.85, w: 2.8, h: 1.6, rectRadius: 0.06, fill: { color: 'FCE4EC' } });
+s17b.addText('INSTAGRAM', { x: 7.15, y: 4.95, w: 2.5, h: 0.2, fontSize: 8, fontFace: FONT, bold: true, color: PINK, isTextBox: true, margin: 0 });
+s17b.addText('10', { x: 7.15, y: 5.2, w: 2, h: 0.5, fontSize: 30, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
+s17b.addText('sessioni al sito', { x: 7.15, y: 5.65, w: 2.5, h: 0.2, fontSize: 8, fontFace: FONT, color: GRAY, isTextBox: true, margin: 0 });
+s17b.addText('100% engagement, 5,67 pag/sess\nCanale di awareness, non di traffico diretto', {
+  x: 7.15, y: 5.9, w: 2.5, h: 0.4,
+  fontSize: 7, fontFace: FONT, color: GRAY, isTextBox: true, margin: 0
+});
+
+s17b.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 10.0, y: 4.85, w: 2.8, h: 1.6, rectRadius: 0.06, fill: { color: 'FFEBEE' } });
+s17b.addText('YOUTUBE', { x: 10.15, y: 4.95, w: 2.5, h: 0.2, fontSize: 8, fontFace: FONT, bold: true, color: RED, isTextBox: true, margin: 0 });
+s17b.addText('2', { x: 10.15, y: 5.2, w: 2, h: 0.5, fontSize: 30, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
+s17b.addText('sessioni al sito', { x: 10.15, y: 5.65, w: 2.5, h: 0.2, fontSize: 8, fontFace: FONT, color: GRAY, isTextBox: true, margin: 0 });
+s17b.addText('Canale emergente, 100% eng.\n8 pag/sessione, durata 2h 21m', {
+  x: 10.15, y: 5.9, w: 2.5, h: 0.4,
+  fontSize: 7, fontFace: FONT, color: GRAY, isTextBox: true, margin: 0
+});
+
+addFooter(s17b, 'Fonte dati: Meta Ads, GA4 | Periodo: set 2026 vs set 2025');
+
+// =============================================
+// SLIDE 18 - PINTEREST | ANALISI APPROFONDITA
 // =============================================
 const s18 = pres.addSlide({ sectionTitle: 'Focus Magazine' });
-addSlideBase(s18, 'PINTEREST');
-addTitle(s18, 'Pinterest si conferma un canale in crescita: sessioni +22% rispetto al 2025');
+addSlideBase(s18, 'PINTEREST | ANALISI APPROFONDITA');
+addTitle(s18, 'Pinterest cresce del 22% in sessioni, ma l\'engagement scende di 15 punti: serve ottimizzare la qualita');
 
-s18.addText('+22%', {
-  x: 0.5, y: 1.8, w: 5, h: 1.5,
-  fontSize: 80, fontFace: FONT, bold: true, color: GREEN, isTextBox: true, margin: 0
+// LEFT - Hero number + bar chart
+s18.addText('+22,1%', {
+  x: 0.5, y: 1.8, w: 4, h: 1.0,
+  fontSize: 60, fontFace: FONT, bold: true, color: GREEN, isTextBox: true, margin: 0
 });
-s18.addText('CRESCITA SESSIONI DA PINTEREST', {
-  x: 0.5, y: 3.2, w: 5, h: 0.3,
-  fontSize: 11, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0
-});
-
-const pinKpis = [
-  { label: 'SESSIONI SET 2026', val: '1.653' },
-  { label: 'SESSIONI SET 2025', val: '1.354' },
-  { label: 'QUOTA SUL TOTALE', val: '6,4%' }
-];
-pinKpis.forEach((kpi, i) => {
-  const y = 1.8 + i * 1.2;
-  s18.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 6.0, y: y, w: 6.8, h: 1.0, rectRadius: 0.08, fill: { color: LGRAY } });
-  s18.addText(kpi.label, { x: 6.2, y: y + 0.1, w: 3, h: 0.2, fontSize: 8, fontFace: FONT, bold: true, color: GRAY, isTextBox: true, margin: 0 });
-  s18.addText(kpi.val, { x: 6.2, y: y + 0.35, w: 3, h: 0.45, fontSize: 26, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
+s18.addText('CRESCITA SESSIONI YOY', {
+  x: 0.5, y: 2.75, w: 4, h: 0.25,
+  fontSize: 10, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0
 });
 
 s18.addChart(pres.charts.BAR, [
   { name: '', labels: ['Set 2026', 'Set 2025'], values: [1653, 1354] }
 ], {
-  x: 0.5, y: 3.8, w: 5.0, h: 2.8,
+  x: 0.3, y: 3.2, w: 4.2, h: 2.0,
   showTitle: false,
   barDir: 'col', barGrouping: 'clustered',
   chartColors: [PINK],
-  showValue: true, dataLabelPosition: 'outEnd', dataLabelColor: DARK, dataLabelFontSize: 12, dataLabelFontFace: '+mn-lt',
+  showValue: true, dataLabelPosition: 'outEnd', dataLabelColor: DARK, dataLabelFontSize: 11, dataLabelFontFace: '+mn-lt',
   showLegend: false,
-  catAxisLabelColor: GRAY, catAxisLabelFontSize: 10, catAxisLabelFontFace: '+mn-lt',
+  catAxisLabelColor: GRAY, catAxisLabelFontSize: 9, catAxisLabelFontFace: '+mn-lt',
   valAxisHidden: true,
   valGridLine: { style: 'none' }, catGridLine: { style: 'none' }
 });
 
-s18.addText('Pinterest è un canale che porta traffico qualificato, con utenti interessati al design e all\'arredamento. La crescita del 22% conferma il valore della presenza organica sulla piattaforma.', {
-  x: 6.0, y: 5.3, w: 6.8, h: 0.8,
-  fontSize: 10, fontFace: FONT, color: GRAY, isTextBox: true, margin: 0
+// RIGHT - Engagement and quality metrics comparison
+s18.addText('METRICHE DI QUALITA', {
+  x: 5.0, y: 1.65, w: 4, h: 0.25,
+  fontSize: 9, fontFace: FONT, bold: true, color: RED, isTextBox: true, margin: 0
+});
+
+const pinMetrics = [
+  { metric: 'ENGAGEMENT RATE', val26: '67,6%', val25: '82,5%', delta: '-14,9 pp', negative: true },
+  { metric: 'PAGINE / SESSIONE', val26: '1,52', val25: '1,71', delta: '-11,1%', negative: true },
+  { metric: 'DURATA MEDIA', val26: '3m 19s', val25: '1m 47s', delta: '+85,6%', negative: false },
+  { metric: 'SESSIONI TOTALI', val26: '1.653', val25: '1.354', delta: '+22,1%', negative: false }
+];
+
+pinMetrics.forEach((m, i) => {
+  const y = 2.0 + i * 1.15;
+  s18.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 5.0, y: y, w: 7.8, h: 0.95, rectRadius: 0.06, fill: { color: LGRAY } });
+  s18.addText(m.metric, { x: 5.2, y: y + 0.05, w: 2.5, h: 0.2, fontSize: 8, fontFace: FONT, bold: true, color: GRAY, isTextBox: true, margin: 0 });
+  s18.addText(m.val26, { x: 5.2, y: y + 0.3, w: 2, h: 0.45, fontSize: 22, fontFace: FONT, bold: true, color: DARK, isTextBox: true, margin: 0 });
+  s18.addText('2025: ' + m.val25, { x: 7.5, y: y + 0.35, w: 2, h: 0.3, fontSize: 10, fontFace: FONT, color: GRAY, isTextBox: true, margin: 0 });
+  s18.addText(m.delta, { x: 10.5, y: y + 0.25, w: 2, h: 0.4, fontSize: 16, fontFace: FONT, bold: true, color: m.negative ? RED : GREEN, align: 'right', isTextBox: true, margin: 0 });
+});
+
+// COMPARISON with other channels
+s18.addText('CONFRONTO CON ALTRI CANALI (ENGAGEMENT RATE)', {
+  x: 5.0, y: 6.05, w: 5, h: 0.2,
+  fontSize: 8, fontFace: FONT, bold: true, color: GRAY, isTextBox: true, margin: 0
+});
+const pinCompare = [
+  { ch: 'Paid Search', val: '95,6%', x: 5.0 },
+  { ch: 'Organic Search', val: '81,6%', x: 7.2 },
+  { ch: 'Paid Social', val: '82,6%', x: 9.3 },
+  { ch: 'Pinterest', val: '67,6%', x: 11.3 }
+];
+pinCompare.forEach(c => {
+  s18.addText(c.ch, { x: c.x, y: 6.3, w: 1.9, h: 0.15, fontSize: 7, fontFace: FONT, color: GRAY, isTextBox: true, margin: 0 });
+  s18.addText(c.val, { x: c.x, y: 6.45, w: 1.9, h: 0.3, fontSize: 14, fontFace: FONT, bold: true, color: c.ch === 'Pinterest' ? RED : DARK, isTextBox: true, margin: 0 });
+});
+
+// Bottom insight
+s18.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.5, y: 5.5, w: 4.2, h: 1.3, rectRadius: 0.08, fill: { color: 'FFF0EF' } });
+s18.addShape(pres.shapes.RECTANGLE, { x: 0.5, y: 5.5, w: 0.06, h: 1.3, fill: { color: RED } });
+s18.addText([
+  { text: 'I volumi crescono ma la qualita cala. ', options: { bold: true, fontSize: 10, breakLine: true } },
+  { text: 'Il 99% del traffico Pinterest (1.639 su 1.653) arriva da distribuzione paid. L\'engagement in calo (-15 pp) e la bassa profondita (1,52 pag.) suggeriscono di rivedere targeting e creativita.', options: { fontSize: 9 } }
+], {
+  x: 0.75, y: 5.6, w: 3.8, h: 1.1,
+  fontFace: FONT, color: DARK, isTextBox: true, margin: 0, lineSpacingMultiple: 1.2
 });
 addFooter(s18, 'Fonte dati: GA4 | Periodo: set 2026 vs set 2025');
 
