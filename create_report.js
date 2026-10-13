@@ -125,6 +125,7 @@ s3.addChart(pres.charts.LINE, [
   { name: 'Settembre 2025', labels: days, values: sess2025 }
 ], {
   x: 0.3, y: 1.7, w: 8.5, h: 4.0,
+  fill: 'FFFFFF',
   showTitle: false,
   showLegend: true, legendPos: 't', legendFontSize: 9, legendFontFace: '+mn-lt', legendColor: GRAY,
   chartColors: [RED, 'CCCCCC'],
@@ -200,6 +201,7 @@ s4.addChart(pres.charts.BAR, [
   { name: 'Set 2025', labels: ['Paid Search', 'Paid Social', 'Cross-net.', 'Organic', 'Direct'], values: [3876, 4676, 19, 4448, 2009] }
 ], {
   x: 5.8, y: 1.7, w: 7.0, h: 4.2,
+  fill: 'FFFFFF',
   showTitle: false,
   barDir: 'bar', barGrouping: 'clustered',
   chartColors: [RED, 'CCCCCC'],
@@ -371,6 +373,7 @@ s6b.addChart(pres.charts.BAR, [
   { name: 'Set 2025', labels: ['Homepage', 'Tutte le porte', 'Soluzioni speciali', 'Punti vendita', 'Porte filo muro', 'Maniglie'], values: [1237, 422, 397, 170, 214, 180] }
 ], {
   x: 6.9, y: 2.05, w: 5.9, h: 3.0,
+  fill: 'FFFFFF',
   showTitle: false,
   barDir: 'bar', barGrouping: 'clustered',
   chartColors: [BLUE, 'CCCCCC'],
@@ -581,6 +584,7 @@ s8.addChart(pres.charts.BAR, [
   { name: 'Clic', labels: ['DG Traffico', 'Search Generic', 'Brand Prot.', 'DG Lead Gen', 'Brand Product'], values: [19737, 17384, 2911, 2288, 1911] }
 ], {
   x: 0.5, y: 4.75, w: 7.5, h: 1.8,
+  fill: 'FFFFFF',
   showTitle: false,
   barDir: 'bar', barGrouping: 'clustered',
   chartColors: [RED],
@@ -661,6 +665,7 @@ s9.addChart(pres.charts.BAR, [
   { name: 'CPC', labels: ['Store Locator', 'Blog Consid.', 'Lead Gen Riv.', 'Promo PED', 'FEEL5 B2B', 'Area Pro B2B'], values: [0.11, 0.15, 0.48, 0.68, 0.99, 1.13] }
 ], {
   x: 0.5, y: 4.65, w: 7.5, h: 2.0,
+  fill: 'FFFFFF',
   showTitle: false,
   barDir: 'bar', barGrouping: 'clustered',
   chartColors: [BLUE],
@@ -701,6 +706,7 @@ s9b.addChart(pres.charts.BAR, [
   { name: 'Engagement Rate %', labels: ['Paid Search', 'Cross-network', 'Organic Social', 'Paid Social', 'Organic Search', 'Direct', 'Referral', 'Display'], values: [95.6, 89.1, 88.9, 82.6, 81.6, 78.9, 77.4, 60.3] }
 ], {
   x: 0.2, y: 1.9, w: 6.8, h: 3.6,
+  fill: 'FFFFFF',
   showTitle: false,
   barDir: 'bar', barGrouping: 'clustered',
   chartColors: [RED],
@@ -893,6 +899,7 @@ s12.addChart(pres.charts.BAR, [
   { name: 'Set 2025', labels: ['Info prodotto', 'Registrazioni', 'FEEL5', 'Form contatto', 'Contatta PV', 'FEEL4', 'Newsletter'], values: [100, 55, 99, 36, 29, 2, 2] }
 ], {
   x: 0.5, y: 3.2, w: 12.3, h: 3.2,
+  fill: 'FFFFFF',
   showTitle: false,
   barDir: 'bar', barGrouping: 'clustered',
   chartColors: [RED, 'CCCCCC'],
@@ -1214,6 +1221,7 @@ s17.addChart(pres.charts.BAR, [
   { name: 'Sessioni', labels: magPages.map(p => p.page), values: magPages.map(p => p.sessions) }
 ], {
   x: 0.5, y: 4.3, w: 12.3, h: 2.2,
+  fill: 'FFFFFF',
   showTitle: false,
   barDir: 'bar', barGrouping: 'clustered',
   chartColors: [RED],
@@ -1358,6 +1366,7 @@ s18.addChart(pres.charts.BAR, [
   { name: '', labels: ['Set 2026', 'Set 2025'], values: [1653, 1354] }
 ], {
   x: 0.3, y: 3.2, w: 4.2, h: 2.0,
+  fill: 'FFFFFF',
   showTitle: false,
   barDir: 'col', barGrouping: 'clustered',
   chartColors: [PINK],
